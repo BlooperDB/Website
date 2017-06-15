@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A Factorio blueprint viewer and database.",
   "private": true,
-  "repository": "https://github.com/FactorioDB/Website",
+  "repository": "https://github.com/Blooper/Website",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
