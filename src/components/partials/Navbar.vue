@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <div class="container">
+    <container class="navbar-inner">
       <router-link to="/" class="navbar-brand">
         <div class="logo-block">
           <img src="../../assets/img/logo.svg">
@@ -9,17 +9,35 @@
           Blooper
         </div>
       </router-link>
-    </div>
+      <div class="navbar-search">
+        <div class="navbar-search-inner">
+          <icon class="search-icon">search</icon>
+          <text-input class="search-input" type="text" placeholder="Search blueprints..."></text-input>
+        </div>
+      </div>
+      <div class="navbar-links">
+        <icon>account_circle</icon>
+      </div>
+    </container>
   </nav>
 </template>
 
 <script>
+  import Container from './Container';
+  import TextInput from './TextInput';
+  import Icon from './Icon';
+
   export default {
-    name: 'navbar'
+    name: 'navbar',
+    components: {
+      Container,
+      TextInput,
+      Icon
+    }
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../assets/scss/variables";
 
   .navbar {
@@ -27,7 +45,7 @@
     height: 80px;
     width: 100%;
 
-    .container {
+    .navbar-inner {
       display: flex;
       height: 100%;
     }
@@ -55,14 +73,51 @@
         backface-visibility: hidden;
       }
     }
+
+    .navbar-search {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      margin: 0 30px;
+
+      .navbar-search-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparentize(#333, 0.9);
+        flex: 1;
+        padding-left: 15px;
+        border-radius: 5px;
+      }
+
+      .search-input {
+        flex: 1;
+
+        input {
+          font-size: 1.2em;
+          border-bottom: none !important;
+          padding: 10px 15px !important;
+        }
+      }
+      .search-icon {
+        color: #FFF;
+      }
+    }
+
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+    }
   }
 
   @keyframes rotate {
     0% {
-      transform: rotate(0deg);
+      transform: rotate(0deg) translateZ(0) scale(1.0, 1.0);
     }
     100% {
-      transform: rotate(360deg);
+      transform: rotate(360deg) translateZ(0) scale(1.0, 1.0);
     }
   }
 </style>
