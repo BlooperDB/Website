@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Index from '../components/views/Index';
+/* eslint-disable global-require */
+const Index = resolve => require(['../components/views/Index'], resolve);
 
 Vue.use(Router);
 

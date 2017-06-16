@@ -9,12 +9,7 @@
           Blooper
         </div>
       </router-link>
-      <div class="navbar-search">
-        <div class="navbar-search-inner">
-          <icon class="search-icon">search</icon>
-          <text-input class="search-input" type="text" placeholder="Search blueprints..."></text-input>
-        </div>
-      </div>
+      <navbar-search></navbar-search>
       <div class="navbar-links">
         <icon>account_circle</icon>
       </div>
@@ -24,15 +19,15 @@
 
 <script>
   import Container from './Container';
-  import TextInput from './TextInput';
   import Icon from './Icon';
+  import NavbarSearch from './NavbarSearch';
 
   export default {
     name: 'navbar',
     components: {
       Container,
-      TextInput,
-      Icon
+      Icon,
+      NavbarSearch
     }
   };
 </script>
@@ -44,6 +39,7 @@
     background: linear-gradient(to right, #357aff, #57bfff);
     height: 80px;
     width: 100%;
+    position: relative;
 
     .navbar-inner {
       display: flex;
@@ -59,13 +55,17 @@
       .logo-block {
         flex: 1;
         width: 40px;
-        margin-right: 10px;
       }
 
       .text-block {
         font-size: 2em;
         font-weight: 100;
         color: #FFF;
+        margin-left: 10px;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
 
       &:hover .logo-block img {
@@ -74,35 +74,7 @@
       }
     }
 
-    .navbar-search {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      margin: 0 30px;
 
-      .navbar-search-inner {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: transparentize(#333, 0.9);
-        flex: 1;
-        padding-left: 15px;
-        border-radius: 5px;
-      }
-
-      .search-input {
-        flex: 1;
-
-        input {
-          font-size: 1.2em;
-          border-bottom: none !important;
-          padding: 10px 15px !important;
-        }
-      }
-      .search-icon {
-        color: #FFF;
-      }
-    }
 
     .navbar-links {
       display: flex;

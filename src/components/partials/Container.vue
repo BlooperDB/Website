@@ -13,6 +13,7 @@
 <style lang="scss" scoped>
   .container {
     padding: 0 200px;
+    width: 100%;
 
     @media (max-width: 1640px) {
       padding: 0 100px;

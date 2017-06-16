@@ -21,14 +21,6 @@
 <style lang="scss">
   @import "assets/scss/main";
 
-  html, body {
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: "Roboto", sans-serif;
-  }
-
   #app {
     height: 100vh;
     overflow-x: hidden;
