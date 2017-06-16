@@ -1,6 +1,6 @@
 <template>
   <div class="text-input">
-    <input :type="type" :placeholder="placeholder" />
+    <input ref="input" :type="type" :placeholder="placeholder" :value="value" @input="updateValue($event.target.value)" />
   </div>
 </template>
 
@@ -23,6 +23,15 @@
       },
       placeholder: {
         type: String
+      },
+      value: {
+        type: String
+      }
+    },
+    methods: {
+      updateValue(value) {
+        this.$refs.input.value = value;
+        this.$emit('input', value);
       }
     }
   };
