@@ -1,38 +1,46 @@
 <template>
-  <nav class="navbar">
-    <container class="navbar-inner">
-      <router-link to="/" class="navbar-brand">
-        <div class="logo-block">
-          <img src="../../assets/img/logo.svg">
+  <div>
+    <nav class="navbar">
+      <container class="navbar-inner">
+        <router-link to="/" class="navbar-brand">
+          <div class="logo-block">
+            <img src="../../assets/img/logo.svg">
+          </div>
+          <div class="text-block">
+            Blooper
+          </div>
+        </router-link>
+        <div class="navbar-search">
+          <div class="navbar-search-inner">
+            <icon class="search-icon">search</icon>
+            <text-input class="search-input" type="text" placeholder="Search blueprints..."></text-input>
+          </div>
         </div>
-        <div class="text-block">
-          Blooper
+        <div class="navbar-links">
+          <icon>account_circle</icon>
         </div>
-      </router-link>
-      <div class="navbar-search">
-        <div class="navbar-search-inner">
-          <icon class="search-icon">search</icon>
-          <text-input class="search-input" type="text" placeholder="Search blueprints..."></text-input>
-        </div>
-      </div>
-      <div class="navbar-links">
-        <icon>account_circle</icon>
-      </div>
-    </container>
-  </nav>
+      </container>
+    </nav>
+    <button @click="$refs.loginpopup.show()">Login</button>
+    <keep-alive>
+      <login-popup ref="loginpopup"></login-popup>
+    </keep-alive>
+  </div>
 </template>
 
 <script>
   import Container from './Container';
   import TextInput from './TextInput';
   import Icon from './Icon';
+  import LoginPopup from './LoginPopup';
 
   export default {
     name: 'navbar',
     components: {
       Container,
       TextInput,
-      Icon
+      Icon,
+      LoginPopup
     }
   };
 </script>
