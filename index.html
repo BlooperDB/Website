@@ -28,15 +28,28 @@
 
     <!-- Webpack stuff -->
     <% for (var chunk of webpack.chunks) {
-        for (var file of chunk.files) {
-          if (file.match(/\.(js|css)$/)) { %>
+    for (var file of chunk.files) {
+    if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400|Material+Icons" rel="stylesheet">
   </head>
   <body>
-    <div id="app">This is your fallback content in case JavaScript fails to load.</div>
-    <!-- Todo: only include in production -->
+    <div id="app">
+      <div class="loading-icon">
+        <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 356.3 356.3">
+          <style>
+            .st0{fill:none;stroke:#FFFFFF;stroke-width:10;stroke-miterlimit:10;}
+          </style>
+          <path class="st0" d="M350.7 163.9l-31.4-11.2c-3.7-20.6-11.8-39.7-23.3-56.3l14.3-30.2c-6.2-7.3-12.9-14-20.2-20.2l-30.2 14.3c-16.6-11.5-35.6-19.6-56.3-23.3L192.5 5.6c-4.8-.4-9.5-.6-14.3-.6s-9.6.2-14.3.6L152.7 37c-20.6 3.7-39.7 11.8-56.3 23.3L66.3 46.1C59 52.2 52.2 59 46.1 66.3l14.3 30.2c-11.5 16.6-19.6 35.6-23.3 56.3L5.6 163.9c-.4 4.7-.6 9.5-.6 14.3s.2 9.6.6 14.3L37 203.7c3.7 20.6 11.8 39.7 23.3 56.3L46 290.2c6.2 7.3 12.9 14 20.2 20.2l30.2-14.3c16.6 11.5 35.6 19.6 56.3 23.3l11.2 31.4c4.7.4 9.5.6 14.3.6s9.6-.2 14.3-.6l11.2-31.4c20.6-3.7 39.7-11.8 56.3-23.3l30.2 14.3c7.3-6.2 14-12.9 20.2-20.2L296.1 260c11.5-16.6 19.6-35.6 23.3-56.3l31.4-11.2c.4-4.7.6-9.5.6-14.3s-.3-9.6-.7-14.3zm-172.5 60.6c-25.6 0-46.3-20.7-46.3-46.3s20.7-46.3 46.3-46.3 46.3 20.7 46.3 46.3-20.7 46.3-46.3 46.3z"/>
+        </svg>
+      </div>
+    </div>
+    <noscript>
+      <div class="noscript-overlay">
+        <h2>This website requires that you have JavaScript enabled</h2>
+      </div>
+    </noscript>
     <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
     <!-- built files will be auto injected -->
   </body>
