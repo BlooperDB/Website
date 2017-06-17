@@ -5,3 +5,6 @@ script:
   - npm install
   - npm test
   - npm run build
+cache:
+  directories:
+    - "node_modules"
