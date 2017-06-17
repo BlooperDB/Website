@@ -1,6 +1,6 @@
 <template>
   <div class="text-input">
-    <input ref="input" :type="type" :placeholder="placeholder" :value="value" @input="updateValue($event.target.value)" />
+    <input :type="type" :placeholder="placeholder" :value="value" @keyup="passKeyup" @input="updateValue($event.target.value)" />
   </div>
 </template>
 
@@ -30,8 +30,10 @@
     },
     methods: {
       updateValue(value) {
-        this.$refs.input.value = value;
         this.$emit('input', value);
+      },
+      passKeyup(event) {
+        this.$emit('keyup', event);
       }
     }
   };

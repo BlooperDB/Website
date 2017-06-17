@@ -2,7 +2,7 @@
   <div id="app">
     <navbar></navbar>
     <main>
-      <transition name="page">
+      <transition name="page" mode="out-in">
         <router-view></router-view>
       </transition>
     </main>
@@ -28,13 +28,15 @@
     overflow-x: hidden;
     overflow-y: scroll;
     background-color: #333;
+    position: relative;
   }
 
   .page-enter-active, .page-leave-active {
-    transition: opacity .3s ease;
+    transition: opacity .3s ease, transform .3s ease;
   }
 
   .page-enter, .page-leave-to {
     opacity: 0;
+    transform: translateY(20px);
   }
 </style>

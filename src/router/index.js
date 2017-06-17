@@ -3,6 +3,8 @@ import Router from 'vue-router';
 
 /* eslint-disable global-require */
 const Index = resolve => require(['../components/views/Index'], resolve);
+const Search = resolve => require(['../components/views/Search'], resolve);
+const Upload = resolve => require(['../components/views/Upload'], resolve);
 
 Vue.use(Router);
 
@@ -11,8 +13,19 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Index',
+      name: 'index',
       component: Index
+    },
+    {
+      path: '/search/:query?',
+      name: 'search',
+      component: Search,
+      props: true
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: Upload
     }
   ]
 });

@@ -67,6 +67,7 @@
       .logo-block {
         flex: 1;
         width: 40px;
+        pointer-events: none;
       }
 
       .text-block {

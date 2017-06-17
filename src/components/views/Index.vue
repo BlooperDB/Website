@@ -43,6 +43,7 @@
     .masthead-logo {
       max-width: 200px;
       margin: 0 auto;
+      pointer-events: none;
     }
 
     @media (max-width: 425px) {

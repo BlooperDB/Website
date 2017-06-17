@@ -13,7 +13,6 @@ const actions = {};
 const mutations = {
   [types.AUTH_SET_USER_ID_TOKEN](currentState, payload) {
     currentState.userIdToken = payload;
-    console.log(payload);
   }
 };
 

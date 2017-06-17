@@ -3,7 +3,7 @@
     <div class="navbar-search-inner">
       <icon class="search-icon" @click="setSearchRevealVisible(true)">search</icon>
       <text-input v-model="searchQuery" class="search-input" type="text"
-                  placeholder="Search blueprints..."></text-input>
+                  placeholder="Search blueprints..." @keyup.enter="route(searchQuery)"></text-input>
     </div>
     <transition name="fade">
       <div v-if="searchRevealVisible">
@@ -11,7 +11,7 @@
           <container class="navbar-search-reveal-inner">
             <icon class="back-icon" @click="setSearchRevealVisible(false)">arrow_back</icon>
             <text-input v-model="searchQuery" class="search-reveal-input" type="text"
-                        placeholder="Search blueprints..."></text-input>
+                        placeholder="Search blueprints..." @keyup.enter="route(searchQuery)"></text-input>
           </container>
         </div>
       </div>
@@ -20,9 +20,11 @@
 </template>
 
 <script>
+  import debounce from 'lodash.debounce';
   import Container from './Container';
   import Icon from './Icon';
   import TextInput from './TextInput';
+  import { SEARCH_SET_QUERY } from '../../store/types';
 
   export default {
     name: 'navbar-search',
@@ -37,9 +39,41 @@
         searchQuery: ''
       };
     },
+    computed: {
+      originalQuery() {
+        return this.$store.state.search.query;
+      }
+    },
     methods: {
       setSearchRevealVisible(searchRevealVisible) {
         this.searchRevealVisible = searchRevealVisible;
+      },
+      // Wait for the user to stop typing
+      runSearch: debounce(() => {
+        // TODO make request to API
+      }, 500),
+      route(query) {
+        if (query === '') {
+          this.$router.replace({ name: 'search' });
+          return;
+        }
+
+        if (this.$route.name === 'search') {
+          this.$router.replace({ name: 'search', params: { query } });
+        } else {
+          this.$router.push({ name: 'search', params: { query } });
+        }
+      }
+    },
+    watch: {
+      searchQuery(newSearchQuery) {
+        this.runSearch();
+        this.route(newSearchQuery);
+
+        this.$store.commit(SEARCH_SET_QUERY, this.searchQuery);
+      },
+      originalQuery(newSearchQuery) {
+        this.searchQuery = newSearchQuery;
       }
     }
   };
