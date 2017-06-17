@@ -1,18 +1,19 @@
 import * as types from '../types';
 
 const state = {
-  user: null
+  userIdToken: null
 };
 
 const getters = {
-  user: currentState => currentState.user
+  user: currentState => currentState.userIdToken
 };
 
 const actions = {};
 
 const mutations = {
-  [types.SET_USER](currentState, payload) {
-    currentState.user = payload;
+  [types.AUTH_SET_USER_ID_TOKEN](currentState, payload) {
+    currentState.userIdToken = payload;
+    console.log(payload);
   }
 };
 

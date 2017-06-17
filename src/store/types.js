@@ -1,5 +1,5 @@
 // Auth
-export const SET_USER = 'SET_USER';
+export const AUTH_SET_USER_ID_TOKEN = 'AUTH_SET_USER_ID_TOKEN';
 
-// UI
-export const UI_ACCOUNT_POPUP = 'UI_ACCOUNT_POPUP';
+// Search
+export const SEARCH_SET_QUERY = 'SEARCH_SET_QUERY';
