@@ -1,16 +1,24 @@
 import * as types from '../types';
 
 const state = {
-  jwt: null
+  user: null
 };
 
+const getters = {
+  user: currentState => currentState.user
+};
+
+const actions = {};
+
 const mutations = {
-  [types.AUTH_JWT](currentState, payload) {
-    currentState.jwt = payload;
+  [types.SET_USER](currentState, payload) {
+    currentState.user = payload;
   }
 };
 
 export default {
   state,
+  getters,
+  actions,
   mutations
 };

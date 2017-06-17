@@ -1,9 +1,7 @@
 <template>
   <div class="navbar-search">
     <div class="navbar-search-inner">
-      <div class="icon-wrapper" @click="setSearchRevealVisible(true)">
-        <icon class="search-icon">search</icon>
-      </div>
+      <icon class="search-icon" @click="setSearchRevealVisible(true)">search</icon>
       <text-input v-model="searchQuery" class="search-input" type="text"
                   placeholder="Search blueprints..."></text-input>
     </div>
@@ -11,9 +9,7 @@
       <div v-if="searchRevealVisible">
         <div class="navbar-search-reveal">
           <container class="navbar-search-reveal-inner">
-            <div class="icon-wrapper" @click="setSearchRevealVisible(false)">
-              <icon class="back-icon">arrow_back</icon>
-            </div>
+            <icon class="back-icon" @click="setSearchRevealVisible(false)">arrow_back</icon>
             <text-input v-model="searchQuery" class="search-reveal-input" type="text"
                         placeholder="Search blueprints..."></text-input>
           </container>
@@ -128,15 +124,12 @@
 
     .back-icon {
       cursor: pointer;
+      color: #333;
     }
 
     @media (min-width: 426px) {
       display: none;
     }
-  }
-
-  .icon-wrapper {
-    height: 24px;
   }
 
   .fade-enter-active, .fade-leave-active {

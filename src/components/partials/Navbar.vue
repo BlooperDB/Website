@@ -12,7 +12,8 @@
         </router-link>
         <navbar-search></navbar-search>
         <div class="navbar-links">
-          <div @click="$refs.loginpopup.show()"><icon>account_circle</icon></div>
+          <router-link class="navbar-link" to="/upload"><icon>add_circle</icon></router-link>
+          <icon class="navbar-link" @click="$refs.loginpopup.show()">account_circle</icon>
         </div>
       </container>
     </nav>
@@ -47,6 +48,10 @@
     height: 80px;
     width: 100%;
     position: relative;
+
+    &.shadow {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
 
     .navbar-inner {
       display: flex;
@@ -86,6 +91,23 @@
       align-items: center;
       justify-content: center;
       color: #FFF;
+
+      .navbar-link {
+        cursor: pointer;
+        color: #FFF;
+        margin-right: 20px;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+      a.navbar-link {
+        text-decoration: none;
+
+        i {
+          display: block;
+        }
+      }
     }
   }
 
