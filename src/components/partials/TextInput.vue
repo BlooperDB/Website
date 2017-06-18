@@ -1,6 +1,11 @@
 <template>
   <div class="text-input">
-    <input :type="type" :placeholder="placeholder" :value="value" @keyup="passKeyup" @input="updateValue($event.target.value)" />
+    <span v-if="multiline">
+      <textarea :type="type" :placeholder="placeholder" :value="value" @keyup="passKeyup" @input="updateValue($event.target.value)"></textarea>
+    </span>
+    <span v-else>
+      <input :type="type" :placeholder="placeholder" :value="value" @keyup="passKeyup" @input="updateValue($event.target.value)" />
+    </span>
   </div>
 </template>
 
@@ -26,6 +31,9 @@
       },
       value: {
         type: String
+      },
+      multiline: {
+        type: Boolean
       }
     },
     methods: {
@@ -43,18 +51,27 @@
   .text-input {
     width: 100%;
 
-    input {
+    input, textarea {
       display: block;
       border: none;
-      border-bottom: 1px solid #FFF;
       outline: none;
-      background-color: transparent;
       border-radius: 0;
       color: #FFF;
       font-family: "Roboto", sans-serif;
       font-weight: 100;
       width: 100%;
       padding: 10px 5px;
+      background-color: transparent;
+
+      &::placeholder {
+        color: transparentize(#FFF, 0.5);
+      }
+    }
+
+    textarea {
+      resize: none;
+      padding: 15px;
+      border-radius: 2px;
 
       &::placeholder {
         color: transparentize(#FFF, 0.5);

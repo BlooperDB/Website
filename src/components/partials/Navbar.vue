@@ -12,8 +12,14 @@
         </router-link>
         <navbar-search></navbar-search>
         <div class="navbar-links">
-          <router-link class="navbar-link" to="/upload"><icon>add_circle</icon></router-link>
-          <icon class="navbar-link" @click="$refs.loginpopup.show()">account_circle</icon>
+          <router-link class="navbar-link" to="/add">
+            <styled-button icon="true">
+              <icon>add_circle</icon>
+            </styled-button>
+          </router-link>
+          <styled-button class="navbar-link" @click="$refs.loginpopup.show()" icon="true">
+            <icon>account_circle</icon>
+          </styled-button>
         </div>
       </container>
     </nav>
@@ -28,6 +34,7 @@
   import Icon from './Icon';
   import LoginPopup from './LoginPopup';
   import NavbarSearch from './NavbarSearch';
+  import StyledButton from '../partials/StyledButton';
 
   export default {
     name: 'navbar',
@@ -35,7 +42,8 @@
       Container,
       Icon,
       NavbarSearch,
-      LoginPopup
+      LoginPopup,
+      StyledButton
     },
     mounted() {
       // Wait for animation to complete when mouse is no longer hovered
@@ -73,7 +81,7 @@
     position: relative;
 
     &.shadow {
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     }
 
     .navbar-inner {
@@ -125,7 +133,7 @@
           margin: 0;
         }
       }
-      a.navbar-link {
+      .navbar-link {
         text-decoration: none;
 
         i {

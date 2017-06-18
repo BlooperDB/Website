@@ -55,6 +55,16 @@
       handleResize() {
         this.canvas.width = this.dimensions.width = this.parent.offsetWidth;
         this.canvas.height = this.dimensions.height = this.parent.offsetHeight;
+
+        this.canvas.style.width = `${this.parent.offsetWidth}px`;
+        this.canvas.style.height = `${this.parent.offsetHeight}px`;
+
+        if (window.devicePixelRatio > 1) {
+          this.canvas.width *= window.devicePixelRatio;
+          this.canvas.height *= window.devicePixelRatio;
+
+          this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        }
       },
       draw() {
         requestAnimationFrame(() => {
