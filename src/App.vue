@@ -6,15 +6,20 @@
         <router-view></router-view>
       </transition>
     </main>
+    <footer>
+      <global-footer></global-footer>
+    </footer>
   </div>
 </template>
 
 <script>
+  import GlobalFooter from './components/partials/GlobalFooter';
   import Navbar from './components/partials/Navbar';
 
   export default {
     name: 'app',
     components: {
+      GlobalFooter,
       Navbar
     }
   };
@@ -28,6 +33,12 @@
     min-height: 100vh;
     background-color: #333;
     position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
   }
 
   .page-enter-active, .page-leave-active {

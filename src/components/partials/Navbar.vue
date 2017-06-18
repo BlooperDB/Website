@@ -17,22 +17,20 @@
               <icon>add_circle</icon>
             </styled-button>
           </router-link>
-          <styled-button class="navbar-link" @click="$refs.loginpopup.show()" icon="true">
-            <icon>account_circle</icon>
-          </styled-button>
+          <router-link class="navbar-link" to="/login">
+            <styled-button icon="true">
+              <icon>account_circle</icon>
+            </styled-button>
+          </router-link>
         </div>
       </container>
     </nav>
-    <keep-alive>
-      <login-popup ref="loginpopup"></login-popup>
-    </keep-alive>
   </div>
 </template>
 
 <script>
   import Container from './Container';
   import Icon from './Icon';
-  import LoginPopup from './LoginPopup';
   import NavbarSearch from './NavbarSearch';
   import StyledButton from '../partials/StyledButton';
 
@@ -42,7 +40,6 @@
       Container,
       Icon,
       NavbarSearch,
-      LoginPopup,
       StyledButton
     },
     mounted() {

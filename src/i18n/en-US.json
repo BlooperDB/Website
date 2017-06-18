@@ -1,0 +1,15 @@
+{
+  "index": {
+    "slogan": "Download and share Factorio blueprints.",
+    "popularBlueprints": "Popular Blueprints"
+  },
+  "login": {
+    "headerText": "Log in to Blooper"
+  },
+  "search": {
+    "placeholder": "Search blueprints..."
+  },
+  "footer": {
+    "copyright": "All rights reserved."
+  }
+}

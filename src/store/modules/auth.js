@@ -1,11 +1,13 @@
 import * as types from '../types';
 
 const state = {
-  userIdToken: null
+  userIdToken: null, // ID obtained from Google SSO
+  user: null         // User object obtained from API
 };
 
 const getters = {
-  user: currentState => currentState.userIdToken
+  userIdToken: currentState => currentState.userIdToken,
+  user: currentState => currentState.user
 };
 
 const actions = {};

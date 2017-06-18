@@ -1,4 +1,5 @@
 # Blooper
+[![Build Status](https://api.travis-ci.org/BlooperDB/Website.svg?branch=master)](https://travis-ci.org/BlooperDB/Website)
 
 A Factorio blueprint viewer and database powered by Vue.
 

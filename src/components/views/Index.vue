@@ -5,12 +5,12 @@
         <div class="masthead-logo">
           <img src="../../assets/img/logo.svg"/>
         </div>
-        <h1>Share and download Factorio blueprints.</h1>
+        <h1>{{ $t('index.slogan') }}</h1>
       </container>
     </section>
     <section id="popular">
       <container>
-        <h1>Popular Blueprints</h1>
+        <h1>{{ $t('index.popularBlueprints') }}</h1>
       </container>
     </section>
   </div>

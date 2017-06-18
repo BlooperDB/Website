@@ -3,7 +3,7 @@
     <div class="navbar-search-inner">
       <icon class="search-icon" @click="setSearchRevealVisible(true)">search</icon>
       <text-input v-model="searchQuery" class="search-input" type="text"
-                  placeholder="Search blueprints..." @keyup.enter="route(searchQuery)"></text-input>
+                  :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
     </div>
     <transition name="fade">
       <div v-if="searchRevealVisible">
@@ -11,7 +11,7 @@
           <container class="navbar-search-reveal-inner">
             <icon class="back-icon" @click="setSearchRevealVisible(false)">arrow_back</icon>
             <text-input v-model="searchQuery" class="search-reveal-input" type="text"
-                        placeholder="Search blueprints..." @keyup.enter="route(searchQuery)"></text-input>
+                        :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
           </container>
         </div>
       </div>
