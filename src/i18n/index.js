@@ -7,15 +7,12 @@ import store from '../store';
 Vue.use(i18n.plugin, store);
 
 // Default to the browser language
-const language = localStorage.getItem('language') || window.navigator.userLanguage || window.navigator.language;
+const storedLanguage = localStorage.getItem('language');
+const userLanguages = (storedLanguage && [storedLanguage]) || window.navigator.languages || [];
 
-import('./en-US.json')
-  .then((langFile) => {
-    Vue.i18n.add(language, langFile);
-    Vue.i18n.set(language);
-  });
+let loaded = false;
 
-if (language !== 'en-US') {
+userLanguages.some((language) => {
   if (language in languages) {
     import(`./${language}.json`)
       .then((langFile) => {
@@ -23,7 +20,17 @@ if (language !== 'en-US') {
         Vue.i18n.set(language);
         Vue.i18n.fallback('en-US');
       });
+    loaded = true;
   }
+  return loaded;
+});
+
+if (!loaded) {
+  import('./en-US.json')
+    .then((langFile) => {
+      Vue.i18n.add('en-US', langFile);
+      Vue.i18n.set('en-US');
+    });
 }
 
 function changeLanguage(languageCode) {
@@ -33,7 +40,7 @@ function changeLanguage(languageCode) {
     return;
   }
 
-  if (language in languages) {
+  if (languageCode in languages) {
     import(`./${languageCode}.json`)
       .then((langFile) => {
         Vue.i18n.add(languageCode, langFile);
