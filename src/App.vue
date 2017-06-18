@@ -24,9 +24,8 @@
   @import "assets/scss/main";
 
   #app {
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    height: 100%;
+    min-height: 100vh;
     background-color: #333;
     position: relative;
   }
