@@ -36,6 +36,29 @@
       Icon,
       NavbarSearch,
       LoginPopup
+    },
+    mounted() {
+      // Wait for animation to complete when mouse is no longer hovered
+
+      const brand = document.querySelector('.navbar-brand');
+      const logo = document.querySelector('.logo-block img');
+
+      let hovered = false;
+
+      brand.addEventListener('mouseover', () => {
+        logo.classList.add('animated');
+        hovered = true;
+      });
+
+      brand.addEventListener('mouseleave', () => {
+        hovered = false;
+      });
+
+      logo.addEventListener('animationiteration', () => {
+        if (!hovered) {
+          logo.classList.remove('animated');
+        }
+      });
     }
   };
 </script>
@@ -81,7 +104,7 @@
         }
       }
 
-      &:hover .logo-block img {
+      img.animated {
         animation: rotate 3s infinite;
         backface-visibility: hidden;
       }
