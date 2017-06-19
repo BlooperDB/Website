@@ -1,7 +1,7 @@
 <template>
   <div class="navbar-search">
     <div class="navbar-search-inner">
-      <icon class="search-icon" @click="setSearchRevealVisible(true)">search</icon>
+      <md-icon class="search-icon" @click="setSearchRevealVisible(true)">search</md-icon>
       <text-input v-model="searchQuery" class="search-input" type="text"
                   :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
     </div>
@@ -9,7 +9,7 @@
       <div v-if="searchRevealVisible">
         <div class="navbar-search-reveal">
           <container class="navbar-search-reveal-inner">
-            <icon class="back-icon" @click="setSearchRevealVisible(false)">arrow_back</icon>
+            <md-icon class="back-icon" @click="setSearchRevealVisible(false)">arrow_back</md-icon>
             <text-input v-model="searchQuery" class="search-reveal-input" type="text"
                         :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
           </container>
@@ -22,7 +22,6 @@
 <script>
   import debounce from 'lodash.debounce';
   import Container from './Container';
-  import Icon from './Icon';
   import TextInput from './TextInput';
   import { SEARCH_SET_QUERY } from '../../store/types';
 
@@ -30,7 +29,6 @@
     name: 'navbar-search',
     components: {
       Container,
-      Icon,
       TextInput
     },
     data() {

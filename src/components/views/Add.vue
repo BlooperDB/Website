@@ -4,7 +4,7 @@
       <container>
         <h1>Add a Blueprint</h1>
         <text-input class="input-area" placeholder="Paste a blueprint code here" multiline></text-input>
-        <styled-button class="input-button">Add Blueprint</styled-button>
+        <md-button class="md-raised md-primary input-button">Add Blueprint</md-button>
       </container>
     </section>
   </div>
@@ -12,14 +12,12 @@
 
 <script>
   import Container from '../partials/Container';
-  import StyledButton from '../partials/StyledButton';
   import TextInput from '../partials/TextInput';
 
   export default {
     name: 'search',
     components: {
       Container,
-      StyledButton,
       TextInput
     }
   };

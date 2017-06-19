@@ -35,7 +35,8 @@ export const uiConfig = {
 
       return false;
     }
-  }
+  },
+  signInFlow: 'popup'
 };
 
 const ui = new firebaseui.auth.AuthUI(firebase.auth());

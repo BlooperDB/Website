@@ -12,16 +12,27 @@
         </router-link>
         <navbar-search></navbar-search>
         <div class="navbar-links">
-          <router-link class="navbar-link" to="/add">
-            <styled-button icon="true">
-              <icon>add_circle</icon>
-            </styled-button>
+          <router-link to="/add" class="md-button md-icon-button">
+            <md-icon>add</md-icon>
+            <md-ink-ripple />
           </router-link>
-          <router-link class="navbar-link" to="/login">
-            <styled-button icon="true">
-              <icon>account_circle</icon>
-            </styled-button>
-          </router-link>
+          <md-menu v-if="loggedIn" md-direction="bottom left">
+            <md-button md-menu-trigger class="md-icon-button">
+              <md-icon>account_circle</md-icon>
+            </md-button>
+
+            <md-menu-content>
+              <md-menu-item>My Item 1</md-menu-item>
+              <md-menu-item>My Item 2</md-menu-item>
+              <md-menu-item>My Item 3</md-menu-item>
+            </md-menu-content>
+          </md-menu>
+          <template v-else>
+            <md-button @click.native="openLoginDialog()" class="md-icon-button">
+              <md-icon>account_circle</md-icon>
+            </md-button>
+            <login ref="loginDialog"></login>
+          </template>
         </div>
       </container>
     </nav>
@@ -30,17 +41,15 @@
 
 <script>
   import Container from './Container';
-  import Icon from './Icon';
+  import Login from './Login';
   import NavbarSearch from './NavbarSearch';
-  import StyledButton from '../partials/StyledButton';
 
   export default {
     name: 'navbar',
     components: {
       Container,
-      Icon,
-      NavbarSearch,
-      StyledButton
+      Login,
+      NavbarSearch
     },
     mounted() {
       // Wait for animation to complete when mouse is no longer hovered
@@ -64,6 +73,16 @@
           logo.classList.remove('animated');
         }
       });
+    },
+    computed: {
+      loggedIn() {
+        return this.$store.getters.user != null;
+      }
+    },
+    methods: {
+      openLoginDialog() {
+        this.$refs.loginDialog.$refs.loginDialog.open();
+      }
     }
   };
 </script>
@@ -90,7 +109,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
+      text-decoration: none !important;
 
       .logo-block {
         flex: 1;

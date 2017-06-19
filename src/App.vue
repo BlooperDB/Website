@@ -26,6 +26,7 @@
 </script>
 
 <style lang="scss">
+  @import "../node_modules/vue-material/dist/vue-material.css";
   @import "assets/scss/main";
 
   #app {
@@ -35,6 +36,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    color: #FFF;
   }
 
   main {

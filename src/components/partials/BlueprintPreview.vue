@@ -3,7 +3,7 @@
     <canvas id="blueprintCanvas"></canvas>
     <div class="blueprint-controls">
       <div v-if="fullscreen">
-        <icon class="control-icon" @click="setFullscreen(false)">fullscreen_exit</icon>
+        <md-icon class="control-icon" @click="setFullscreen(false)">fullscreen_exit</md-icon>
       </div>
       <div v-else>
         <icon class="control-icon" @click="setFullscreen(true)" onclick="alert('hi')">fullscreen</icon>
@@ -14,13 +14,11 @@
 
 <script>
   import Container from './Container';
-  import Icon from './Icon';
 
   export default {
     name: 'blueprint-preview',
     components: {
-      Container,
-      Icon
+      Container
     },
     props: ['blueprint'],
     data() {

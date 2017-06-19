@@ -3,9 +3,13 @@
     <div class="footer-bottom">
       <container class="footer-bottom-inner">
         <div class="footer-part footer-left">
-          <select v-model="selectedLanguage">
-            <option v-for="(language, index) in languages" :value="index">{{ language }}</option>
-          </select>
+            <md-icon>
+              translate
+            </md-icon>
+            <md-select v-model="selectedLanguage">
+              <md-option v-for="(language, index) in languages" :key="language" :value="index">{{ language }}
+              </md-option>
+            </md-select>
         </div>
         <div class="footer-part footer-right">
           &copy; Blooper 2017. {{ $t('footer.copyright') }}
@@ -52,13 +56,17 @@
 <style lang="scss" scoped>
   .footer {
     background-color: #222;
+    height: auto;
+    overflow: hidden;
   }
 
   .footer-bottom {
     padding: 15px 0;
+    width: 100%;
 
     .footer-bottom-inner {
       display: flex;
+      align-items: center;
     }
   }
 
@@ -68,5 +76,19 @@
 
   .footer-right {
     text-align: right;
+  }
+
+  .md-icon {
+    margin-right: 10px;
+  }
+
+  .md-select {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+
+    &:after {
+      color: #FFF !important;
+    }
   }
 </style>
