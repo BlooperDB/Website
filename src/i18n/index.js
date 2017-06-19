@@ -10,8 +10,6 @@ Vue.use(i18n.plugin, store);
 const storedLanguage = localStorage.getItem('language');
 const userLanguages = (storedLanguage && [storedLanguage]) || window.navigator.languages || [];
 
-let loaded = false;
-
 userLanguages.some((language) => {
   if (language in languages) {
     import(`./${language}.json`)
@@ -20,18 +18,16 @@ userLanguages.some((language) => {
         Vue.i18n.set(language);
         Vue.i18n.fallback('en-US');
       });
-    loaded = true;
+    return true;
   }
-  return loaded;
+  return false;
 });
 
-if (!loaded) {
-  import('./en-US.json')
-    .then((langFile) => {
-      Vue.i18n.add('en-US', langFile);
-      Vue.i18n.set('en-US');
-    });
-}
+import('./en-US.json')
+  .then((langFile) => {
+    Vue.i18n.add('en-US', langFile);
+    Vue.i18n.set('en-US');
+  });
 
 function changeLanguage(languageCode) {
   if (Vue.i18n.exists(languageCode)) {
