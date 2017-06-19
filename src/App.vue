@@ -6,9 +6,6 @@
         <router-view></router-view>
       </transition>
     </main>
-    <footer>
-      <global-footer></global-footer>
-    </footer>
   </div>
 </template>
 

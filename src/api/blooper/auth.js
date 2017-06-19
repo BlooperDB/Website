@@ -8,7 +8,7 @@ export function authUser(firebaseToken) {
       'firebase-token': firebaseToken
     })
     .then((response) => {
-      store.commit(AUTH_SET_USER, response);
+      store.commit(AUTH_SET_USER, response.data.data);
     });
 }
 

@@ -3,9 +3,7 @@
     <md-dialog-title>{{ $t('login.headerText') }}</md-dialog-title>
 
     <md-dialog-content>
-      <template v-if="loginDialogOpen">
-        <google-sso-button></google-sso-button>
-      </template>
+      <google-sso-button v-if="loginDialogOpen"></google-sso-button>
     </md-dialog-content>
   </md-dialog>
 </template>
