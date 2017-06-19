@@ -14,7 +14,6 @@ LANG_DIR = os.path.join(DIR, 'languages')
 LANG_JSON = os.path.join(LANG_DIR, 'en-US.json')
 
 def main():
-    print(get_keys())
     new_obj = OrderedDict()
     new_lang = input('Which language are we localising today? ')
     if not LANG_PATTERN.fullmatch(new_lang):
