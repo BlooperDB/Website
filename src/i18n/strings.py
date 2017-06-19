@@ -25,7 +25,7 @@ def main():
         while x != 'y':
             x = 'a'
             translation = input('How would you translate this?\n   {}\n   '.format(val))
-            while x not in 'yn':
+            while x not in ('y', 'n'):
                 x = input('Are you happy with that translation? (y/n) ')
         set_key(new_obj, key, translation)
 
