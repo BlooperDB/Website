@@ -3,23 +3,17 @@
 </template>
 
 <script>
+  import { ui, uiConfig } from '../../api/firebase/auth';
+
   export default {
     name: 'google-sso-button',
     mounted() {
-      window.gapi.signin2.render('googleButton', {
-        scope: 'profile email',
-        width: 240,
-        height: 50,
-        longtitle: true,
-        theme: 'dark'
-      });
+      ui.start('#googleButton', uiConfig);
     }
   };
 </script>
 
 <style lang="scss" scoped>
-  #googleButton {
-    display: inline-block;
-  }
+  @import "../../../node_modules/firebaseui/dist/firebaseui.css";
 </style>
 

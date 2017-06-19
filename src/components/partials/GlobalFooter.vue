@@ -55,7 +55,7 @@
   }
 
   .footer-bottom {
-    padding: 10px 0;
+    padding: 15px 0;
 
     .footer-bottom-inner {
       display: flex;
