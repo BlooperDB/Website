@@ -4,10 +4,8 @@ import axios from '.';
 
 export function authUser(firebaseToken) {
   axios
-    .post('/user/signin', {
-      data: {
-        'firebase-token': firebaseToken
-      }
+    .post('/v1/user/signin', {
+      'firebase-token': firebaseToken
     })
     .then((response) => {
       store.commit(AUTH_SET_USER, response);
