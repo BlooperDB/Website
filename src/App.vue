@@ -32,7 +32,7 @@
   #app {
     height: 100%;
     min-height: 100vh;
-    background-color: #333;
+    background-color: #3a3a3a;
     position: relative;
     display: flex;
     flex-direction: column;

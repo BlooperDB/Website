@@ -24,7 +24,7 @@
             <md-menu-content>
               <md-menu-item>My Item 1</md-menu-item>
               <md-menu-item>My Item 2</md-menu-item>
-              <md-menu-item>My Item 3</md-menu-item>
+              <md-menu-item @click.native="signOut">Sign Out</md-menu-item>
             </md-menu-content>
           </md-menu>
           <template v-else>
@@ -43,6 +43,8 @@
   import Container from './Container';
   import Login from './Login';
   import NavbarSearch from './NavbarSearch';
+  import { authUser, logout } from '../../api/blooper/auth';
+  import { addAuthListener } from '../../api/firebase/auth';
 
   export default {
     name: 'navbar',
@@ -52,6 +54,15 @@
       NavbarSearch
     },
     mounted() {
+      addAuthListener((user) => {
+        if (user) {
+          user.getIdToken(false)
+            .then((token) => {
+              authUser(token);
+            });
+        }
+      });
+
       // Wait for animation to complete when mouse is no longer hovered
 
       const brand = document.querySelector('.navbar-brand');
@@ -82,6 +93,9 @@
     methods: {
       openLoginDialog() {
         this.$refs.loginDialog.$refs.loginDialog.open();
+      },
+      signOut() {
+        logout();
       }
     }
   };

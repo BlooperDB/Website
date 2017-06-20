@@ -2,8 +2,6 @@ import * as firebase from 'firebase';
 import firebaseui from 'firebaseui';
 
 import router from '../../router/index';
-import store from '../../store/index';
-import { AUTH_SET_FIREBASE_ID_TOKEN } from '../../store/types';
 
 import { authUser } from '../blooper/auth';
 
@@ -25,11 +23,10 @@ export const uiConfig = {
   ],
   callbacks: {
     signInSuccess(user) {
-      user.getIdToken().then((accessToken) => {
-        store.commit(AUTH_SET_FIREBASE_ID_TOKEN, accessToken);
-
-        authUser(accessToken);
-      });
+      user.getIdToken()
+        .then((accessToken) => {
+          authUser(accessToken);
+        });
 
       router.push(router.currentRoute.query.redirect ? router.currentRoute.query.redirect : '/');
 
@@ -39,7 +36,23 @@ export const uiConfig = {
   signInFlow: 'popup'
 };
 
-const ui = new firebaseui.auth.AuthUI(firebase.auth());
+const auth = firebase.auth();
+const ui = new firebaseui.auth.AuthUI(auth);
 
+const currentUserListeners = [];
+let currentUser = null;
 
-export { firebase, ui };
+auth.onAuthStateChanged((user) => {
+  currentUser = user;
+  currentUserListeners.forEach(func => func(user));
+});
+
+function getCurrentUser() {
+  return currentUser;
+}
+
+function addAuthListener(func) {
+  currentUserListeners.push(func);
+}
+
+export { firebase, auth, ui, getCurrentUser, addAuthListener };

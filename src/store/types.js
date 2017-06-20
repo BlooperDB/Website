@@ -1,5 +1,6 @@
 // Auth
 export const AUTH_SET_FIREBASE_ID_TOKEN = 'AUTH_SET_FIREBASE_ID_TOKEN';
+export const AUTH_SET_BLOOPER_TOKEN = 'AUTH_SET_BLOOPER_TOKEN';
 export const AUTH_SET_USER = 'AUTH_SET_USER';
 
 // Search
