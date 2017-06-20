@@ -1,15 +1,15 @@
 <template>
-  <div id="blueprintCanvasWrapper" :class="{ fullscreen: fullscreen }">
-    <canvas id="blueprintCanvas"></canvas>
-    <div class="blueprint-controls">
-      <div v-if="fullscreen">
-        <md-icon class="control-icon" @click="setFullscreen(false)">fullscreen_exit</md-icon>
-      </div>
-      <div v-else>
-        <icon class="control-icon" @click="setFullscreen(true)" onclick="alert('hi')">fullscreen</icon>
+    <div id="blueprintCanvasWrapper" :class="{ fullscreen: fullscreen }">
+      <canvas id="blueprintCanvas"></canvas>
+      <div class="blueprint-controls">
+        <div v-if="fullscreen">
+          <md-icon class="control-icon" @click.native="setFullscreen(false)">fullscreen_exit</md-icon>
+        </div>
+        <div v-else>
+          <md-icon class="control-icon" @click.native="setFullscreen(true)">fullscreen</md-icon>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -51,18 +51,20 @@
     },
     methods: {
       handleResize() {
-        this.canvas.width = this.dimensions.width = this.parent.offsetWidth;
-        this.canvas.height = this.dimensions.height = this.parent.offsetHeight;
+        requestAnimationFrame(() => {
+          this.canvas.width = this.dimensions.width = window.innerWidth;
+          this.canvas.height = this.dimensions.height = window.innerHeight;
 
-        this.canvas.style.width = `${this.parent.offsetWidth}px`;
-        this.canvas.style.height = `${this.parent.offsetHeight}px`;
+          this.canvas.style.width = `${window.innerWidth}px`;
+          this.canvas.style.height = `${window.innerHeight}px`;
 
-        if (window.devicePixelRatio > 1) {
-          this.canvas.width *= window.devicePixelRatio;
-          this.canvas.height *= window.devicePixelRatio;
+          if (window.devicePixelRatio > 1) {
+            this.canvas.width *= window.devicePixelRatio;
+            this.canvas.height *= window.devicePixelRatio;
 
-          this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-        }
+            this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+          }
+        });
       },
       draw() {
         requestAnimationFrame(() => {
@@ -81,26 +83,33 @@
         });
       },
       setFullscreen(fullscreen) {
-        // TODO animate resizing
-
         this.fullscreen = fullscreen;
-
-        // Wait one frame before resizing canvas
-        requestAnimationFrame(() => {
-          this.handleResize();
-        });
       }
     }
   };
 </script>
 
 <style lang="scss" scoped>
+  #animationWrapper {
+    overflow: hidden;
+  }
   #blueprintCanvasWrapper {
     height: calc(50vh - 80px);
+    width: 100%;
     position: relative;
+    overflow: hidden;
+
+    // This is probably not an efficient way to do this
+    transition: height 0.7s ease-in-out;
 
     #blueprintCanvas {
       display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
     }
 
     .blueprint-controls {

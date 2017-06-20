@@ -67,11 +67,22 @@
     .footer-bottom-inner {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
     }
   }
 
   .footer-part {
     flex: 1;
+
+    @media (max-width: 768px) {
+      flex-basis: 100%;
+      text-align: center !important;
+      margin: 10px 0;
+
+      .md-select {
+        text-align: left;
+      }
+    }
   }
 
   .footer-right {
