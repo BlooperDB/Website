@@ -1,5 +1,5 @@
 <template>
-  <md-dialog ref="loginDialog" @open="setLoginDialogOpen(true)" @close="setLoginDialogOpen(false)">
+  <md-dialog ref="loginDialog" @open="setLoginDialogOpen(true)">
     <md-dialog-title>{{ $t('login.headerText') }}</md-dialog-title>
 
     <md-dialog-content>
