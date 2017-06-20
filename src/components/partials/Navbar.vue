@@ -36,6 +36,9 @@
         </div>
       </container>
     </nav>
+    <md-snackbar md-position="top center" ref="logoutSnackbar">
+      <span>You have been logged out.</span>
+    </md-snackbar>
   </div>
 </template>
 
@@ -96,6 +99,7 @@
       },
       signOut() {
         logout();
+        this.$refs.logoutSnackbar.open();
       }
     }
   };

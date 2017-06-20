@@ -1,21 +1,28 @@
 <template>
   <div class="navbar-search">
-    <div class="navbar-search-inner">
-      <md-icon class="search-icon" @click="setSearchRevealVisible(true)">search</md-icon>
-      <text-input v-model="searchQuery" class="search-input" type="text"
-                  :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
-    </div>
-    <transition name="fade">
-      <div v-if="searchRevealVisible">
-        <div class="navbar-search-reveal">
-          <container class="navbar-search-reveal-inner">
-            <md-icon class="back-icon" @click="setSearchRevealVisible(false)">arrow_back</md-icon>
-            <text-input v-model="searchQuery" class="search-reveal-input" type="text"
-                        :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
-          </container>
+    <template v-if="mobile">
+      <md-button @click.native="setSearchRevealVisible(true)" class="md-icon-button">
+        <md-icon>search</md-icon>
+      </md-button>
+      <transition name="fade">
+        <div v-if="searchRevealVisible">
+          <div class="navbar-search-reveal">
+            <container class="navbar-search-reveal-inner">
+              <md-icon class="back-icon" @click.native="setSearchRevealVisible(false)">arrow_back</md-icon>
+              <text-input v-model="searchQuery" class="search-reveal-input" type="text"
+                          :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
+            </container>
+          </div>
         </div>
+      </transition>
+    </template>
+    <template v-else>
+      <div class="navbar-search-inner">
+        <md-icon class="search-icon">search</md-icon>
+        <text-input v-model="searchQuery" class="search-input" type="text"
+                    :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
       </div>
-    </transition>
+    </template>
   </div>
 </template>
 
@@ -34,7 +41,8 @@
     data() {
       return {
         searchRevealVisible: false,
-        searchQuery: ''
+        searchQuery: '',
+        mobile: window.innerWidth <= 600
       };
     },
     computed: {
@@ -73,6 +81,13 @@
       originalQuery(newSearchQuery) {
         this.searchQuery = newSearchQuery;
       }
+    },
+    mounted() {
+      window.addEventListener('resize', () => {
+        requestAnimationFrame(() => {
+          this.mobile = window.innerWidth <= 600;
+        });
+      });
     }
   };
 </script>
@@ -107,21 +122,9 @@
       color: #FFF;
     }
 
-    @media (max-width: 425px) {
-      margin-right: 20px;
-
-      .navbar-search-inner {
-        background-color: transparent;
-        justify-content: flex-end;
-      }
-
-      .search-input {
-        display: none;
-      }
-
-      .search-icon {
-        cursor: pointer;
-      }
+    @media (max-width: 600px) {
+      justify-content: flex-end;
+      margin: 0;
     }
   }
 
@@ -134,6 +137,7 @@
     background-color: #FFF;
     display: flex;
     align-items: center;
+    z-index: 5;
 
     .navbar-search-reveal-inner {
       display: flex;
@@ -157,10 +161,6 @@
     .back-icon {
       cursor: pointer;
       color: #333;
-    }
-
-    @media (min-width: 426px) {
-      display: none;
     }
   }
 

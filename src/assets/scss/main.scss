@@ -12,7 +12,6 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   font-family: "Roboto", sans-serif;
-  font-weight: 100;
   color: #FFF;
   line-height: 1;
 }
@@ -64,4 +63,8 @@ h1 {
   justify-content: center;
   text-align: center;
   padding: 0 20px;
+}
+
+.md-snackbar-container {
+  line-height: 20px;
 }
