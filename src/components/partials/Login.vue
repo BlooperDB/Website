@@ -3,7 +3,7 @@
     <md-dialog-title>{{ $t('login.headerText') }}</md-dialog-title>
 
     <md-dialog-content>
-      <google-sso-button v-if="loginDialogOpen"></google-sso-button>
+      <google-sso-button v-if="loginDialogOpen" ref="loginButton"></google-sso-button>
     </md-dialog-content>
   </md-dialog>
 </template>
@@ -24,6 +24,13 @@
     methods: {
       setLoginDialogOpen(loginDialogOpen) {
         this.loginDialogOpen = loginDialogOpen;
+        requestAnimationFrame(() => {
+          const button = this.$refs.loginButton;
+          const textSpan = button && button.$el.querySelector('.firebaseui-idp-text-long');
+          if (textSpan) {
+            textSpan.innerHTML = this.$t('login.buttonText');
+          }
+        });
       }
     }
   };

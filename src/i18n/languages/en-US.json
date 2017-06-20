@@ -4,7 +4,8 @@
         "popularBlueprints": "Popular Blueprints"
     },
     "login": {
-        "headerText": "Log in to Blooper"
+        "headerText": "Log in to Blooper",
+        "buttonText": "Log in with Google"
     },
     "search": {
         "placeholder": "Search blueprints..."

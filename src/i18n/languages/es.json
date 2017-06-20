@@ -4,7 +4,8 @@
         "slogan": "Descargas y compartes cianotipos de Factorio."
     },
     "login": {
-        "headerText": "Accedes a Blooper"
+        "headerText": "Accedes a Blooper",
+        "buttonText": "Accedes con Google"
     },
     "search": {
         "placeholder": "Buscas cianotipos..."

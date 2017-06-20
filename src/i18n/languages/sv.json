@@ -4,7 +4,8 @@
         "popularBlueprints": "Popul\u00e4ra Bl\u00e5kopior"
     },
     "login": {
-        "headerText": "Logga in p\u00e5 Blooper"
+        "headerText": "Logga in p\u00e5 Blooper",
+        "buttonText": "Logga in med Google"
     },
     "search": {
         "placeholder": "S\u00f6k efter bl\u00e5kopior..."
