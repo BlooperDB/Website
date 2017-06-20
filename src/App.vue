@@ -6,20 +6,20 @@
         <router-view></router-view>
       </transition>
     </main>
-    <!-- <footer>
-      <global-footer></global-footer>
-    </footer> -->
+    <footer>
+      <global-footer/>
+    </footer>
   </div>
 </template>
 
 <script>
-  // import GlobalFooter from './components/partials/GlobalFooter';
+  import GlobalFooter from './components/partials/GlobalFooter';
   import Navbar from './components/partials/Navbar';
 
   export default {
     name: 'app',
     components: {
-      // GlobalFooter,
+      GlobalFooter,
       Navbar
     }
   };
