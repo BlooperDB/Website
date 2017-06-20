@@ -2,19 +2,16 @@ import Vue from 'vue';
 import i18n from 'vuex-i18n';
 
 import languages from './languages.json';
+import enUS from './languages/en-US.json';
 import store from '../store';
 
 Vue.use(i18n.plugin, store);
+Vue.i18n.add('en-US', enUS);
+Vue.i18n.set('en-US');
 
 // Default to the browser language
 const storedLanguage = localStorage.getItem('language');
 const userLanguages = (storedLanguage && [storedLanguage]) || window.navigator.languages || [];
-
-import('./languages/en-US.json')
-  .then((langFile) => {
-    Vue.i18n.add('en-US', langFile);
-    Vue.i18n.set('en-US');
-  });
 
 userLanguages.some((language) => {
   if (language in languages) {
