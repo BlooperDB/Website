@@ -2,7 +2,7 @@
   <div>
     <section id="results">
       <container>
-        <h1>My Blueprints</h1>
+        <h1>{{ $t('navbar.menu.blueprints') }}</h1>
       </container>
     </section>
   </div>

@@ -2,7 +2,7 @@
   <div>
     <section id="results">
       <container>
-        <h1>Settings</h1>
+        <h1>{{ $t('navbar.menu.settings') }}</h1>
       </container>
     </section>
   </div>
