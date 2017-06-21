@@ -29,7 +29,6 @@
         "placeholder": {
             "name": "Enter blueprint name",
             "description": "Enter blueprint description",
-            "version": "Enter blueprint version",
             "blueprint": "Paste a blueprint code here"
         }
     },

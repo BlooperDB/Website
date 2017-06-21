@@ -29,7 +29,6 @@
         "placeholder": {
             "name": "Skriva in bl\u00e5kopiasnamn",
             "description": "Skriva in bl\u00e5kopiasbeskrivning",
-            "version": "Skriva in bl\u00e5kopiasversion",
             "blueprint": "Klistra in en bl\u00e5kopiaskod"
         }
     },
