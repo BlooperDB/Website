@@ -9,6 +9,28 @@
     name: 'google-sso-button',
     mounted() {
       ui.start('#googleButton', uiConfig);
+
+      this.localize();
+    },
+    methods: {
+      localize() {
+        requestAnimationFrame(() => {
+          const textSpan = this.$el.querySelector('.firebaseui-idp-text-long');
+          if (textSpan) {
+            textSpan.innerHTML = this.$t('navbar.login.button');
+          }
+        });
+      }
+    },
+    computed: {
+      buttonText() {
+        return this.$t('navbar.login.button');
+      }
+    },
+    watch: {
+      buttonText() {
+        this.localize();
+      }
     }
   };
 </script>
