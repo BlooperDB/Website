@@ -3,14 +3,31 @@
         "slogan": "Download and share Factorio blueprints.",
         "popularBlueprints": "Popular Blueprints"
     },
-    "login": {
-        "headerText": "Log in to Blooper",
-        "buttonText": "Log in with Google"
+    "navbar": {
+        "login": {
+            "header": "Log in to Blooper",
+            "button": "Log in with Google"
+        },
+        "menu": {
+            "blueprints": "My Blueprints",
+            "settings": "Settings",
+            "signOut": "Sign out"
+        }
+    },
+    "footer": {
+        "copyright": "All rights reserved."
     },
     "search": {
         "placeholder": "Search blueprints..."
     },
-    "footer": {
-        "copyright": "All rights reserved."
+    "create": {
+        "title": "Upload a Blueprint",
+        "button": "Save Blueprint",
+        "placeholder": {
+            "name": "Enter blueprint name",
+            "description": "Enter blueprint description",
+            "version": "Enter blueprint version",
+            "blueprint": "Paste a blueprint code here"
+        }
     }
 }

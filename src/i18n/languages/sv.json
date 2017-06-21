@@ -3,14 +3,31 @@
         "slogan": "Ladda ned och dela med sig Factoriobl\u00e5kopior.",
         "popularBlueprints": "Popul\u00e4ra Bl\u00e5kopior"
     },
-    "login": {
-        "headerText": "Logga in p\u00e5 Blooper",
-        "buttonText": "Logga in med Google"
+    "navbar": {
+        "login": {
+            "header": "Logga in p\u00e5 Blooper",
+            "button": "Logga in med Google"
+        },
+        "menu": {
+            "blueprints": "Mina Bl\u00e5kopior",
+            "settings": "Inst\u00e4llningar",
+            "signOut": "Logga ut"
+        }
+    },
+    "footer": {
+        "copyright": "Alla r\u00e4ttigheter f\u00f6rbeh\u00e5llna."
     },
     "search": {
         "placeholder": "S\u00f6k efter bl\u00e5kopior..."
     },
-    "footer": {
-        "copyright": "Alla r\u00e4ttigheter f\u00f6rbeh\u00e5llna."
+    "create": {
+        "title": "Ladda upp en bl\u00e5kopia",
+        "button": "Spara bl\u00e5kopia",
+        "placeholder": {
+            "name": "Skriva in bl\u00e5kopiasnamn",
+            "description": "Skriva in bl\u00e5kopiasbeskrivning",
+            "version": "Skriva in bl\u00e5kopiasversion",
+            "blueprint": "Klistra in en bl\u00e5kopiaskod"
+        }
     }
 }

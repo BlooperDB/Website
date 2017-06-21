@@ -12,23 +12,38 @@
         </router-link>
         <navbar-search></navbar-search>
         <div class="navbar-links">
-          <router-link to="/add" class="md-button md-icon-button">
+          <router-link to="/blueprints/create" class="md-button md-icon-button">
             <md-icon>add</md-icon>
             <md-ink-ripple />
           </router-link>
-          <md-menu v-if="loggedIn" md-direction="bottom left">
+
+          <md-menu v-if="loggedIn" md-size="4" md-direction="bottom left">
             <md-button md-menu-trigger class="md-icon-button">
               <md-icon>account_circle</md-icon>
             </md-button>
 
-            <md-menu-content>
-              <md-menu-item>My Item 1</md-menu-item>
-              <md-menu-item>My Item 2</md-menu-item>
-              <md-menu-item @click.native="signOut">Sign Out</md-menu-item>
+            <md-menu-content id="nav-dropdown">
+              <router-link to="/blueprints">
+                <md-menu-item>
+                  <md-icon>account_circle</md-icon>
+                  <span>{{ $t('navbar.menu.blueprints') }}</span>
+                </md-menu-item>
+              </router-link>
+              <router-link to="/settings">
+                <md-menu-item>
+                  <md-icon>settings</md-icon>
+                  <span>{{ $t('navbar.menu.settings') }}</span>
+                </md-menu-item>
+              </router-link>
+              <md-menu-item @click.native="goSignOut">
+                <md-icon>power_settings_new</md-icon>
+                <span>{{ $t('navbar.menu.signOut') }}</span>
+              </md-menu-item>
             </md-menu-content>
           </md-menu>
+
           <template v-else>
-            <md-button @click.native="openLoginDialog()" class="md-icon-button">
+            <md-button @click.native="openLoginDialog" class="md-icon-button">
               <md-icon>account_circle</md-icon>
             </md-button>
             <login ref="loginDialog"></login>
@@ -43,8 +58,8 @@
 </template>
 
 <script>
-  import Container from './Container';
   import Login from './Login';
+  import Container from './Container';
   import NavbarSearch from './NavbarSearch';
   import { authUser, logout } from '../../api/blooper/auth';
   import { addAuthListener } from '../../api/firebase/auth';
@@ -97,9 +112,11 @@
       openLoginDialog() {
         this.$refs.loginDialog.$refs.loginDialog.open();
       },
-      signOut() {
-        logout();
-        this.$refs.logoutSnackbar.open();
+      goSignOut() {
+        logout(() => {
+          this.$refs.logoutSnackbar.open();
+          this.$router.push('/');
+        });
       }
     }
   };
@@ -107,6 +124,16 @@
 
 <style lang="scss">
   @import "../../assets/scss/variables";
+
+  #nav-dropdown {
+    a {
+      text-decoration: unset;
+
+      span {
+        color: black;
+      }
+    }
+  }
 
   .navbar {
     background: linear-gradient(to right, #357aff, #57bfff);
@@ -163,15 +190,12 @@
         color: #FFF;
         margin-right: 20px;
 
-        &:last-child {
-          margin: 0;
-        }
-      }
-      .navbar-link {
-        text-decoration: none;
-
         i {
           display: block;
+        }
+
+        &:last-child {
+          margin: 0;
         }
       }
     }

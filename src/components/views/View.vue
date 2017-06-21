@@ -11,7 +11,7 @@
   import Container from '../partials/Container';
 
   export default {
-    name: 'search',
+    name: 'view-view',
     components: {
       BlueprintPreview,
       Container

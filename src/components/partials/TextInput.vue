@@ -1,10 +1,10 @@
 <template>
   <div class="text-input">
     <span v-if="multiline">
-      <textarea :type="type" :placeholder="placeholder" :value="value" @keyup="passKeyup" @input="updateValue($event.target.value)"></textarea>
+      <textarea ref="textarea" :type="type" :placeholder="placeholder" :value="value" @keyup="passKeyup" @input="updateValue($event.target.value)"></textarea>
     </span>
     <span v-else>
-      <input :type="type" :placeholder="placeholder" :value="value" @keyup="passKeyup" @input="updateValue($event.target.value)" />
+      <input ref="input" :type="type" :placeholder="placeholder" :value="value" @keyup="passKeyup" @input="updateValue($event.target.value)" />
     </span>
   </div>
 </template>
@@ -37,6 +37,11 @@
       }
     },
     methods: {
+      getValue() {
+        return this.multiline
+          ? this.$refs.textarea.value
+          : this.$refs.input.value;
+      },
       updateValue(value) {
         this.$emit('input', value);
       },
@@ -60,7 +65,6 @@
       font-family: "Roboto", sans-serif;
       font-weight: 100;
       width: 100%;
-      padding: 10px 5px;
       background-color: transparent;
 
       &::placeholder {
@@ -72,10 +76,6 @@
       resize: none;
       padding: 15px;
       border-radius: 2px;
-
-      &::placeholder {
-        color: transparentize(#FFF, 0.5);
-      }
     }
   }
 </style>

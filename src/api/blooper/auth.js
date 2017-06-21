@@ -31,23 +31,26 @@ export function authUser(firebaseToken) {
         const payload = data.data;
         const blooperToken = payload['blooper-token'];
         const firstLogin = payload['first-login'];
+        retrieveUser(blooperToken);
         if (firstLogin) {
           // TODO show create user dialog
-        } else {
-          retrieveUser(blooperToken);
         }
       } else {
-        // memes
+        // failed to sign in
       }
     });
 }
 
-export function logout() {
+export function logout(func) {
   auth.signOut()
     .then(() => {
       store.commit(AUTH_SET_FIREBASE_ID_TOKEN, null);
       store.commit(AUTH_SET_BLOOPER_TOKEN, null);
       store.commit(AUTH_SET_USER, null);
       delete axios.defaults.headers.common['Blooper-Token'];
+
+      if (func) {
+        func();
+      }
     });
 }

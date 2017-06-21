@@ -1,16 +1,18 @@
 {
     "index": {
-        "popularBlueprints": "Cianotipos Populares",
-        "slogan": "Descargas y compartes cianotipos de Factorio."
+        "slogan": "Descargas y compartes cianotipos de Factorio.",
+        "popularBlueprints": "Cianotipos Populares"
     },
-    "login": {
-        "headerText": "Accedes a Blooper",
-        "buttonText": "Accedes con Google"
-    },
-    "search": {
-        "placeholder": "Buscas cianotipos..."
+    "navbar": {
+        "login": {
+            "header": "Accedes a Blooper",
+            "button": "Accedes con Google"
+        }
     },
     "footer": {
         "copyright": "Todos los derechos reservados."
+    },
+    "search": {
+        "placeholder": "Buscas cianotipos..."
     }
 }

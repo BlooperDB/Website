@@ -2,7 +2,7 @@
   <div>
     <section id="results">
       <container>
-        <h1>Results</h1>
+        <h1>My Blueprints</h1>
       </container>
     </section>
   </div>
@@ -10,16 +10,12 @@
 
 <script>
   import Container from '../partials/Container';
-  import { SEARCH_SET_QUERY } from '../../store/types';
 
   export default {
-    name: 'search-view',
+    name: 'my-blueprints-view',
     props: ['query'],
     components: {
       Container
-    },
-    mounted() {
-      this.$store.commit(SEARCH_SET_QUERY, this.query);
     }
   };
 </script>

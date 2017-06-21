@@ -20,7 +20,7 @@
   import Container from '../partials/Container';
 
   export default {
-    name: 'index',
+    name: 'index-view',
     components: {
       Container
     }

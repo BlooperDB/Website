@@ -1,6 +1,6 @@
 <template>
   <md-dialog ref="loginDialog" @open="setLoginDialogOpen(true)">
-    <md-dialog-title>{{ $t('login.headerText') }}</md-dialog-title>
+    <md-dialog-title>{{ $t('navbar.login.header') }}</md-dialog-title>
 
     <md-dialog-content>
       <google-sso-button v-if="loginDialogOpen" ref="loginButton"></google-sso-button>
@@ -28,7 +28,7 @@
           const button = this.$refs.loginButton;
           const textSpan = button && button.$el.querySelector('.firebaseui-idp-text-long');
           if (textSpan) {
-            textSpan.innerHTML = this.$t('login.buttonText');
+            textSpan.innerHTML = this.$t('navbar.login.button');
           }
         });
       }
