@@ -1,33 +1,33 @@
 {
     "index": {
-        "slogan": "Descargas y compartes cianotipos de Factorio.",
+        "slogan": "Descarga y comparte cianotipos de Factorio.",
         "popularBlueprints": "Cianotipos Populares"
     },
     "navbar": {
         "login": {
-            "header": "Accedes a Blooper",
-            "button": "Accedes con Google"
+            "header": "Accede a Blooper",
+            "button": "Accede con Google"
         },
         "menu": {
             "blueprints": "Mis Cianotipos",
             "settings": "Ajustes",
-            "signOut": "Desconectas"
+            "signOut": "Desconecta"
         }
     },
     "footer": {
         "copyright": "Todos los derechos reservados."
     },
     "search": {
-        "placeholder": "Buscas cianotipos..."
+        "placeholder": "Busca cianotipos..."
     },
     "create": {
-        "title": "Subes un Cianotipo",
-        "button": "Guardes el Cianotipo",
+        "title": "Sube un Cianotipo",
+        "button": "Guarde el Cianotipo",
         "placeholder": {
-            "name": "Escribes el nombre de el cianotipo",
-            "description": "Escribes el descripci\u00F3n de el cianotipo",
-            "version": "Esbcribes el versi\u00F3n de el cianotipo",
-            "blueprint": "Pegas el codigo de el cianotipo aqu\u00ED"
+            "name": "Escribe el nombre de el cianotipo",
+            "description": "Escribe el descripci\u00F3n de el cianotipo",
+            "version": "Esbcribe el versi\u00F3n de el cianotipo",
+            "blueprint": "Pega el codigo de el cianotipo aqu\u00ED"
         }
     },
     "view": {
