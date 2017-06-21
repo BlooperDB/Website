@@ -3,6 +3,9 @@
         "slogan": "Download and share Factorio blueprints.",
         "popularBlueprints": "Popular Blueprints"
     },
+    "state": {
+        "loading": "Loading..."
+    },
     "navbar": {
         "login": {
             "header": "Log in to Blooper",
@@ -36,5 +39,8 @@
             "revisions": "Revisions",
             "moreFromUser": "More From User"
         }
+    },
+    "blueprints": {
+        "none": "No blueprints!"
     }
 }

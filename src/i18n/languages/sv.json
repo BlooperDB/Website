@@ -3,6 +3,9 @@
         "slogan": "Ladda ned och dela med sig Factoriobl\u00e5kopior.",
         "popularBlueprints": "Popul\u00e4ra Bl\u00e5kopior"
     },
+    "state": {
+        "loading": "Laddar..."
+    },
     "navbar": {
         "login": {
             "header": "Logga in p\u00e5 Blooper",
@@ -29,5 +32,15 @@
             "version": "Skriva in bl\u00e5kopiasversion",
             "blueprint": "Klistra in en bl\u00e5kopiaskod"
         }
+    },
+    "view": {
+        "tabs": {
+            "overview": "\u00d6versikt",
+            "revisions": "\u00c4ndringar",
+            "moreFromUser": "Fler fr\u00e5n anv\u00e4ndare"
+        }
+    },
+    "blueprints": {
+        "none": "Inga bl\u00e5kopior!"
     }
 }

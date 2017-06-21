@@ -2,7 +2,7 @@
   <div>
     <section id="results">
       <container>
-        <h1>Login</h1>
+        <h1>{{ $t('navbar.login.header') }}</h1>
       </container>
     </section>
   </div>

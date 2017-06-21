@@ -7,9 +7,7 @@
     </section>
     <section id="blueprints">
       <container>
-        <div v-if="loading" style="margin-left: 8px;">
-          Loading...
-        </div>
+        <div v-if="loading" style="margin-left: 8px;">{{ $t('state.loading') }}</div>
         <div v-else-if="rows.length > 0">
           <md-layout
             v-for="(row, ridx) in rows"
@@ -28,9 +26,7 @@
           </md-layout>
           <div style="height: 30px"><br></div>
         </div>
-        <div v-else style="margin-left: 8px;">
-          No blueprints :(
-        </div>
+        <div v-else style="margin-left: 8px;">{{ $t('blueprints.none') }}</div>
       </container>
     </section>
   </div>

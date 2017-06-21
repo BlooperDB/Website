@@ -10,14 +10,16 @@
     mounted() {
       ui.start('#googleButton', uiConfig);
 
-      this.localize();
+      this.localize(true);
     },
     methods: {
-      localize() {
+      localize(retry) {
         requestAnimationFrame(() => {
           const textSpan = this.$el.querySelector('.firebaseui-idp-text-long');
           if (textSpan) {
             textSpan.innerHTML = this.$t('navbar.login.button');
+          } else if (retry) {
+            setTimeout(this.localize, 100);
           }
         });
       }
@@ -29,7 +31,7 @@
     },
     watch: {
       buttonText() {
-        this.localize();
+        this.localize(true);
       }
     }
   };
