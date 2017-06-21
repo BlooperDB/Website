@@ -68,3 +68,11 @@ h1 {
 .md-snackbar-container {
   line-height: 20px;
 }
+
+.md-theme-default.md-tabs>.md-tabs-navigation {
+  background: linear-gradient(to right, #357aff, #57bfff);
+}
+
+.md-theme-default.md-tabs>.md-tabs-navigation .md-tab-indicator {
+  background-color: #FFF !important;
+}

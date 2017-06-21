@@ -3,7 +3,7 @@ import firebaseui from 'firebaseui';
 
 import router from '../../router/index';
 
-import { authUser } from '../blooper/auth';
+import { authUser } from '../blooper/user';
 
 // Initialize Firebase
 const config = {

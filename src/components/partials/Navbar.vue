@@ -61,7 +61,7 @@
   import Login from './Login';
   import Container from './Container';
   import NavbarSearch from './NavbarSearch';
-  import { authUser, logout } from '../../api/blooper/auth';
+  import { authUser, logout } from '../../api/blooper/user';
   import { addAuthListener } from '../../api/firebase/auth';
 
   export default {

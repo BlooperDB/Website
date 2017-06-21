@@ -31,7 +31,8 @@ const router = new Router({
     {
       path: '/view/:id',
       name: 'view',
-      component: View
+      component: View,
+      props: true
     },
     {
       path: '/search/:query?',

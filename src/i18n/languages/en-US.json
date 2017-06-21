@@ -29,5 +29,12 @@
             "version": "Enter blueprint version",
             "blueprint": "Paste a blueprint code here"
         }
+    },
+    "view": {
+        "tabs": {
+            "overview": "Overview",
+            "revisions": "Revisions",
+            "moreFromUser": "More From User"
+        }
     }
 }

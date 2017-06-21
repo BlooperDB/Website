@@ -3,7 +3,7 @@ import store from '../../store';
 import { auth } from '../firebase/auth';
 import { AUTH_SET_BLOOPER_TOKEN, AUTH_SET_FIREBASE_ID_TOKEN, AUTH_SET_USER } from '../../store/types';
 
-function retrieveUser(blooperToken) {
+function getSelf(blooperToken) {
   store.commit(AUTH_SET_BLOOPER_TOKEN, blooperToken);
   axios.defaults.headers.common['Blooper-Token'] = blooperToken;
   axios
@@ -31,7 +31,7 @@ export function authUser(firebaseToken) {
         const payload = data.data;
         const blooperToken = payload['blooper-token'];
         const firstLogin = payload['first-login'];
-        retrieveUser(blooperToken);
+        getSelf(blooperToken);
         if (firstLogin) {
           // TODO show create user dialog
         }
@@ -39,6 +39,12 @@ export function authUser(firebaseToken) {
         // failed to sign in
       }
     });
+}
+
+export function getUser(user) {
+  return axios
+    .get(`/v1/user/${user}`)
+    .then(response => response.data.data);
 }
 
 export function logout(func) {

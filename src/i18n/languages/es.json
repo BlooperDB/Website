@@ -7,6 +7,11 @@
         "login": {
             "header": "Accedes a Blooper",
             "button": "Accedes con Google"
+        },
+        "menu": {
+            "blueprints": "Mis Cianotipos",
+            "settings": "Ajustes",
+            "signOut": "Desconectas"
         }
     },
     "footer": {
@@ -14,5 +19,22 @@
     },
     "search": {
         "placeholder": "Buscas cianotipos..."
+    },
+    "create": {
+        "title": "Subes un Cianotipo",
+        "button": "Guardes el Cianotipo",
+        "placeholder": {
+            "name": "Escribes el nombre de el cianotipo",
+            "description": "Escribes el descripci\u00F3n de el cianotipo",
+            "version": "Esbcribes el versi\u00F3n de el cianotipo",
+            "blueprint": "Pegas el codigo de el cianotipo aqu\u00ED"
+        }
+    },
+    "view": {
+        "tabs": {
+            "overview": "Visi\u00F3n de Conjunto",
+            "revisions": "Revisiones",
+            "moreFromUser": "M\u00E1s de Usuario"
+        }
     }
 }
