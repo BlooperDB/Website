@@ -4,16 +4,10 @@ import firebaseui from 'firebaseui';
 import router from '../../router/index';
 
 import { authUser } from '../blooper/user';
+import projectConfig from '../config/config';
 
 // Initialize Firebase
-const config = {
-  apiKey: 'AIzaSyBdFTFjxmNm_sHSW_I3xUzfylujravBuTc',
-  authDomain: 'blooper-1.firebaseapp.com',
-  databaseURL: 'https://blooper-1.firebaseio.com',
-  projectId: 'blooper-1',
-  storageBucket: 'blooper-1.appspot.com',
-  messagingSenderId: '434311178684'
-};
+const config = projectConfig.firebase;
 
 firebase.initializeApp(config);
 
