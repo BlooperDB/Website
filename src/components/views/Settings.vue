@@ -13,7 +13,6 @@
 
   export default {
     name: 'settings-view',
-    props: ['query'],
     components: {
       Container
     }

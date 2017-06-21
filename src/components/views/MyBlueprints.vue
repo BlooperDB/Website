@@ -13,7 +13,6 @@
 
   export default {
     name: 'my-blueprints-view',
-    props: ['query'],
     components: {
       Container
     }

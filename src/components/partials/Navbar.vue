@@ -110,7 +110,10 @@
     },
     methods: {
       openLoginDialog() {
-        this.$refs.loginDialog.$refs.loginDialog.open();
+        const dialog = this.$refs.loginDialog;
+        if (dialog && dialog.$refs.loginDialog) {
+          dialog.$refs.loginDialog.open();
+        }
       },
       goSignOut() {
         logout(() => {

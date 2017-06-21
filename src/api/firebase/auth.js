@@ -44,7 +44,11 @@ let currentUser = null;
 
 auth.onAuthStateChanged((user) => {
   currentUser = user;
-  currentUserListeners.forEach(func => func(user));
+  currentUserListeners.filter(func => func).forEach((func, idx, arr) => {
+    if (func(user) === false) {
+      arr[idx] = null;
+    }
+  });
 });
 
 function getCurrentUser() {
@@ -52,7 +56,17 @@ function getCurrentUser() {
 }
 
 function addAuthListener(func) {
+  if (func(currentUser) === false) {
+    return -1;
+  }
   currentUserListeners.push(func);
+  return currentUserListeners.length - 1;
 }
 
-export { firebase, auth, ui, getCurrentUser, addAuthListener };
+function removeAuthListener(idx) {
+  if (idx >= 0 && idx < currentUserListeners.length) {
+    currentUserListeners[idx] = null;
+  }
+}
+
+export { firebase, auth, ui, getCurrentUser, addAuthListener, removeAuthListener };

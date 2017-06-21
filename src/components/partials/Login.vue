@@ -24,13 +24,15 @@
     methods: {
       setLoginDialogOpen(loginDialogOpen) {
         this.loginDialogOpen = loginDialogOpen;
-        requestAnimationFrame(() => {
-          const button = this.$refs.loginButton;
-          const textSpan = button && button.$el.querySelector('.firebaseui-idp-text-long');
-          if (textSpan) {
-            textSpan.innerHTML = this.$t('navbar.login.button');
-          }
-        });
+        if (loginDialogOpen) {
+          requestAnimationFrame(() => {
+            const button = this.$refs.loginButton;
+            const textSpan = button && button.$el.querySelector('.firebaseui-idp-text-long');
+            if (textSpan) {
+              textSpan.innerHTML = this.$t('navbar.login.button');
+            }
+          });
+        }
       }
     }
   };
