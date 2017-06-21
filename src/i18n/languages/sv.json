@@ -38,6 +38,9 @@
             "overview": "\u00d6versikt",
             "revisions": "\u00c4ndringar",
             "moreFromUser": "Fler fr\u00e5n anv\u00e4ndare"
+        },
+        "overview": {
+            "by": "av"
         }
     },
     "blueprints": {

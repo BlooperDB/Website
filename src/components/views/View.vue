@@ -10,7 +10,7 @@
             <container>
               <h1 class="blueprint-name">
                 {{ blueprint.name }}
-                <span v-if="author" class="subheader">by <router-link :to="`/user/${author.id}`">{{ author.username }}</router-link></span>
+                <span v-if="author" class="subheader">{{ $t('view.overview.by') }} <router-link :to="`/user/${author.id}`">{{ author.username }}</router-link></span>
               </h1>
               <p>{{ blueprint.description }}</p>
             </container>

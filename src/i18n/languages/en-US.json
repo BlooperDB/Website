@@ -38,6 +38,9 @@
             "overview": "Overview",
             "revisions": "Revisions",
             "moreFromUser": "More From User"
+        },
+        "overview": {
+            "by": "by"
         }
     },
     "blueprints": {
