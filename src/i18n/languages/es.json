@@ -3,6 +3,9 @@
         "slogan": "Descarga y comparte cianotipos de Factorio.",
         "popularBlueprints": "Cianotipos Populares"
     },
+    "state": {
+        "loading": "Cargando..."
+    },
     "navbar": {
         "login": {
             "header": "Accede a Blooper",
@@ -34,6 +37,12 @@
             "overview": "Visi\u00F3n de Conjunto",
             "revisions": "Revisiones",
             "moreFromUser": "M\u00E1s de Usuario"
+        },
+        "overview": {
+            "by": "por"
         }
+    },
+    "blueprints": {
+        "none": "Sin cianotipos!"
     }
 }
