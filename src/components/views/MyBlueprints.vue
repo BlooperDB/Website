@@ -7,7 +7,9 @@
     </section>
     <section id="blueprints">
       <container>
-        <div v-if="loading" style="margin-left: 8px;">{{ $t('state.loading') }}</div>
+        <div v-if="loading">
+          <loader></loader>
+        </div>
         <div v-else-if="rows.length > 0">
           <md-layout
             v-for="(row, ridx) in rows"
@@ -34,6 +36,7 @@
 
 <script>
   import Container from '../partials/Container';
+  import Loader from '../partials/Loader';
   import BlueprintCard from '../partials/BlueprintCard';
   import axios from '../../api/blooper';
 
@@ -43,7 +46,8 @@
     name: 'my-blueprints-view',
     components: {
       Container,
-      BlueprintCard
+      BlueprintCard,
+      Loader
     },
     data() {
       return {
