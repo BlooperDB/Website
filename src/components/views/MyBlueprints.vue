@@ -26,7 +26,6 @@
                 :initialBlueprint="blueprint"></blueprint-card>
             </md-layout>
           </md-layout>
-          <div style="height: 30px"><br></div>
         </div>
         <div v-else style="margin-left: 8px;">{{ $t('blueprints.none') }}</div>
       </container>

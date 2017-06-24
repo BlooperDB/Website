@@ -3,11 +3,11 @@
     <navbar ref="nav"></navbar>
     <main>
       <transition name="page" mode="out-in">
-        <router-view></router-view>
+        <router-view class="router-view"></router-view>
       </transition>
     </main>
     <footer>
-      <global-footer/>
+      <global-footer></global-footer>
     </footer>
   </div>
 </template>
@@ -41,6 +41,12 @@
 
   main {
     flex: 1;
+    display: flex;
+  }
+
+  .router-view {
+    flex: 1;
+    position: relative;
   }
 
   .page-enter-active, .page-leave-active {
@@ -49,6 +55,6 @@
 
   .page-enter, .page-leave-to {
     opacity: 0;
-    transform: translateY(20px);
+    transform: scale(1.01);
   }
 </style>

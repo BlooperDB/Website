@@ -69,9 +69,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .loader-container {
-    height: calc(100vh - 80px);
-  }
   .subheader {
     font-size: 0.4em;
     color: #CCC;

@@ -28,9 +28,11 @@
 
 <script>
   import debounce from 'lodash.debounce';
+
   import Container from './Container';
   import TextInput from './TextInput';
-  import { SEARCH_SET_QUERY } from '../../store/types';
+  import { SEARCH_SET_QUERY, SEARCH_SET_LOADING_RESULTS } from '../../store/types';
+  import { searchBlueprints } from '../../api/blooper/blueprint';
 
   export default {
     name: 'navbar-search',
@@ -54,10 +56,11 @@
       setSearchRevealVisible(searchRevealVisible) {
         this.searchRevealVisible = searchRevealVisible;
       },
-      // Wait for the user to stop typing
-      runSearch: debounce(() => {
-        // TODO make request to API
-      }, 500),
+      // For some reason this doesn't work with an arrow function
+      // eslint-disable-next-line
+      runSearch: debounce(function () {
+        searchBlueprints(this.searchQuery);
+      }, 400),
       route(query) {
         if (query === '') {
           this.$router.replace({ name: 'search' });
@@ -76,6 +79,7 @@
         this.runSearch();
         this.route(newSearchQuery);
 
+        this.$store.commit(SEARCH_SET_LOADING_RESULTS, true);
         this.$store.commit(SEARCH_SET_QUERY, this.searchQuery);
       },
       originalQuery(newSearchQuery) {

@@ -58,6 +58,7 @@
     background-color: #222;
     height: auto;
     overflow: hidden;
+    margin-top: 50px;
   }
 
   .footer-bottom {
