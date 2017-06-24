@@ -6,18 +6,18 @@
         <text-input
           ref="name"
           class="input-area"
-          :placeholder="$t('create.placeholder.name')" />
+          :placeholder="$t('create.placeholder.name')"></text-input>
 
         <text-input
           ref="description"
           class="input-area"
-          :placeholder="$t('create.placeholder.description')" />
+          :placeholder="$t('create.placeholder.description')"></text-input>
 
         <text-input
           ref="blueprint"
           class="input-area"
           :placeholder="$t('create.placeholder.blueprint')"
-          multiline />
+          multiline></text-input>
 
         <md-button
           @click.native="onSubmit"
@@ -26,6 +26,9 @@
         </md-button>
       </container>
     </section>
+    <md-snackbar md-position="top center" ref="errorSnackbar">
+      <span v-if="error">{{ $t('errors.' + error.code) || error.message }}</span>
+    </md-snackbar>
   </div>
 </template>
 
@@ -44,6 +47,11 @@
       return {
         error: null
       };
+    },
+    watch: {
+      error() {
+        this.$refs.errorSnackbar.open();
+      }
     },
     methods: {
       onSubmit() {

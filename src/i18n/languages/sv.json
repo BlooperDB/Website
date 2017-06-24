@@ -44,5 +44,24 @@
     },
     "blueprints": {
         "none": "Inga bl\u00e5kopior!"
+    },
+    "settings": {
+        "button": "Spara",
+        "updated": "Inst\u00e4llningar uppdaterades!",
+        "placeholder": {
+            "username": "Skriva in ett anv\u00e4ndarnamn h\u00e4r"
+        }
+    },
+    "errors": {
+        "1": "Fel: Ogiltig f\u00f6rfr\u00e5gningsinformation",
+        "2": "Fel: Ingenting \u00e4ndrades",
+        "102": "Fel: Du m\u00e5ste vara inloggad f\u00f6r att g\u00f6ra det",
+        "103": "Fel: Anv\u00e4ndare finns inte",
+        "104": "Fel: Det \u00e4r inte ett giltigt anv\u00e4ndarnamn",
+        "105": "Fel: Du beh\u00f6ver ett anv\u00e4ndarnamn f\u00f6r att g\u00f6ra det",
+        "106": "Fel: Det anv\u00e4ndarnamnet \u00e4r redan upptagen",
+        "200": "Fel: Bl\u00e5kopian finns inte",
+        "300": "Fel: Bl\u00e5kopias\u00e4ndringen finns inte",
+        "400": "Fel: Bl\u00e5kopiaskommentaren finns inte"
     }
 }

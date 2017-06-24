@@ -44,5 +44,24 @@
     },
     "blueprints": {
         "none": "No blueprints!"
+    },
+    "settings": {
+        "button": "Save",
+        "updated": "Settings updated!",
+        "placeholder": {
+            "username": "Enter a username here"
+        }
+    },
+    "errors": {
+        "1": "Error: Invalid request data",
+        "2": "Error: Nothing has changed",
+        "102": "Error: You must be logged in to do that",
+        "103": "Error: User not found",
+        "104": "Error: That is not a valid username!",
+        "105": "Error: You need to set a username to do that!",
+        "106": "Error: That username is already taken!",
+        "200": "Error: Blueprint not found",
+        "300": "Error: Blueprint revision not found",
+        "400": "Error: Blueprint comment not found"
     }
 }
