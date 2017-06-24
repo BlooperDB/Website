@@ -31,7 +31,7 @@
 
   import Container from './Container';
   import TextInput from './TextInput';
-  import { SEARCH_SET_QUERY, SEARCH_SET_LOADING_RESULTS } from '../../store/types';
+  import { SEARCH_SET_RESULTS, SEARCH_SET_QUERY, SEARCH_SET_LOADING_RESULTS } from '../../store/types';
   import { searchBlueprints } from '../../api/blooper/blueprint';
 
   export default {
@@ -76,6 +76,11 @@
     },
     watch: {
       searchQuery(newSearchQuery) {
+        if (newSearchQuery === '') {
+          this.$store.commit(SEARCH_SET_RESULTS, []);
+          return;
+        }
+
         this.runSearch();
         this.route(newSearchQuery);
 

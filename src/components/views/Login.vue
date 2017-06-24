@@ -1,11 +1,4 @@
 <template>
-  <div>
-    <section id="results">
-      <container>
-        <h1>{{ $t('navbar.login.header') }}</h1>
-      </container>
-    </section>
-  </div>
 </template>
 
 <script>

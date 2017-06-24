@@ -59,6 +59,7 @@
           if (response.data.success) {
             const data = response.data.data;
             this.blueprints = data.blueprints;
+            console.log(data.blueprints);
           }
           this.loading = false;
         });
@@ -67,5 +68,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+  #blueprints {
+    width: 100vw;
+  }
 </style>

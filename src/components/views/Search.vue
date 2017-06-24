@@ -60,6 +60,7 @@
 <style lang="scss">
   #results {
     height: 100%;
+    width: 100vw;
 
     .container {
       height: 100%;

@@ -27,9 +27,9 @@
         "title": "Sube un Cianotipo",
         "button": "Guarde el Cianotipo",
         "placeholder": {
-            "name": "Escribe el nombre de el cianotipo",
-            "description": "Escribe el descripci\u00F3n de el cianotipo",
-            "blueprint": "Pega el codigo de el cianotipo aqu\u00ED"
+            "name": "El Nombre de el Cianotipo",
+            "description": "El Descripci\u00F3n de el Cianotipo",
+            "blueprint": "El Codigo de el Cianotipo"
         }
     },
     "view": {
@@ -43,6 +43,26 @@
         }
     },
     "blueprints": {
-        "none": "Sin cianotipos!"
+        "none": "\u00A1Sin cianotipos!"
+    },
+    "settings": {
+        "button": "Guarde",
+        "updated": "\u00A1Ajustes updated!",
+        "placeholder": {
+            "username": "Nombre de Usuario"
+        }
+    },
+    "errors": {
+        "1": "Error: Inv\u00E1lido solicitud",
+        "2": "Error: Nada ha cambiado",
+        "102": "Error: Debe iniciar sesi\u00F3n para hacer eso",
+        "103": "Error: Usuario no encontrado",
+        "104": "Error: \u00A1Que no es un nombre de usuario v\u00E1lido!",
+        "105": "Error: \u00A1Necesitas establecer un nombre de usuario para hacerlo!",
+        "106": "Error: \u00A1Ese nombre de usuario ya se encuentra en uso!",
+        "200": "Error: Cianotipo no encontrado",
+        "300": "Error: Revisi\u00F3n de cianotipo no encontrado",
+        "400": "Error: Comentario de cianotipo no encontrado",
+        "500": "Error: Sin términos de búsqueda"
     }
 }

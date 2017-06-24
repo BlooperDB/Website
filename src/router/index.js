@@ -74,8 +74,17 @@ router.beforeEach((to, from, next) => {
       return;
     }
   } else if (to.name === 'login') {
-    // If user is already logged in, redirect them home
+    // If user is already logged in, redirect them
     if (store.getters.user) {
+      // If a redirect location is set, redirect them there
+      if (from.query.redirect) {
+        next({
+          path: from.query.redirect
+        });
+        return;
+      }
+
+      // Otherwise, redirect them home
       next({
         path: '/'
       });

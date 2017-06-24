@@ -3,21 +3,21 @@
     <section id="upload">
       <container>
         <h1>{{ $t('create.title') }}</h1>
-        <text-input
-          ref="name"
-          class="input-area"
-          :placeholder="$t('create.placeholder.name')"></text-input>
 
-        <text-input
-          ref="description"
-          class="input-area"
-          :placeholder="$t('create.placeholder.description')"></text-input>
+        <md-input-container>
+          <label>{{ $t('create.placeholder.name') }}</label>
+          <md-input v-model="name"></md-input>
+        </md-input-container>
 
-        <text-input
-          ref="blueprint"
-          class="input-area"
-          :placeholder="$t('create.placeholder.blueprint')"
-          multiline></text-input>
+        <md-input-container>
+          <label>{{ $t('create.placeholder.description') }}</label>
+          <md-input v-model="description"></md-input>
+        </md-input-container>
+
+        <md-input-container>
+          <label>{{ $t('create.placeholder.blueprint') }}</label>
+          <md-textarea v-model="blueprint"></md-textarea>
+        </md-input-container>
 
         <md-button
           @click.native="onSubmit"
@@ -45,7 +45,10 @@
     },
     data() {
       return {
-        error: null
+        error: null,
+        name: '',
+        description: '',
+        blueprint: ''
       };
     },
     watch: {
@@ -55,23 +58,19 @@
     },
     methods: {
       onSubmit() {
-        const name = this.$refs.name.getValue();
-        const description = this.$refs.description.getValue();
-        const blueprint = this.$refs.blueprint.getValue();
         axios
           .post('/v1/blueprint', {
-            name,
-            description,
-            'blueprint-string': blueprint
+            name: this.name,
+            description: this.description,
+            'blueprint-string': this.blueprint
           })
           .then((response) => {
             const data = response.data;
             if (data.success) {
               const blueprintResponse = data.data;
               const blueprintId = blueprintResponse['blueprint-id'];
-              const globalRevisionId = blueprintResponse['revision-id'];
-              const localRevisionId = blueprintResponse.revision;
-              console.log(blueprintId, globalRevisionId, localRevisionId);
+
+              this.$router.push({ name: 'view', params: { id: blueprintId } });
             } else {
               this.error = data.error;
             }
@@ -82,23 +81,7 @@
 </script>
 
 <style lang="scss">
-  .input-area {
-    margin-bottom: 20px;
-
-    input {
-      padding: 15px;
-      font-size: 1.2em;
-      background-color: transparentize(#FFF, 0.9) !important;
-    }
-
-    textarea {
-      height: 20em;
-      font-size: 1.2em;
-      background-color: transparentize(#FFF, 0.9) !important;
-    }
-  }
-
-  .input-button {
-    font-size: 1.2em;
+  .md-button {
+    margin: 0;
   }
 </style>

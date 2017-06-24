@@ -7,11 +7,10 @@
     </section>
     <section id="settings">
       <container>
-        <text-input
-          ref="username"
-          class="input-area"
-          :value="username"
-          :placeholder="$t('settings.placeholder.username')"></text-input>
+        <md-input-container>
+          <label>{{ $t('settings.placeholder.username') }}</label>
+          <md-input v-model="username"></md-input>
+        </md-input-container>
 
         <md-button
           @click.native="onSubmit"
@@ -33,7 +32,6 @@
   import Container from '../partials/Container';
   import TextInput from '../partials/TextInput';
   import axios from '../../api/blooper';
-  import store from '../../store';
 
   export default {
     name: 'settings-view',
@@ -43,7 +41,7 @@
     },
     data() {
       return {
-        username: store.getters.user.username,
+        username: this.$store.getters.user.username,
         error: null
       };
     },
@@ -51,7 +49,7 @@
       onSubmit() {
         axios
           .put('/v1/user', {
-            username: this.$refs.username.getValue()
+            username: this.username
           })
           .then((response) => {
             if (response.data.success) {
@@ -70,23 +68,4 @@
 </script>
 
 <style lang="scss">
-  .input-area {
-    margin-bottom: 20px;
-
-    input {
-      padding: 15px;
-      font-size: 1.2em;
-      background-color: transparentize(#FFF, 0.9) !important;
-    }
-
-    textarea {
-      height: 20em;
-      font-size: 1.2em;
-      background-color: transparentize(#FFF, 0.9) !important;
-    }
-  }
-
-  .input-button {
-    font-size: 1.2em;
-  }
 </style>

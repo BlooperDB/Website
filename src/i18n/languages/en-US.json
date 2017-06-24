@@ -27,9 +27,10 @@
         "title": "Upload a Blueprint",
         "button": "Save Blueprint",
         "placeholder": {
-            "name": "Enter blueprint name",
-            "description": "Enter blueprint description",
-            "blueprint": "Paste a blueprint code here"
+            "name": "Blueprint Name",
+            "description": "Blueprint Description",
+            "blueprint": "Blueprint Code",
+            "tags": "Add a tag..."
         }
     },
     "view": {
@@ -49,7 +50,7 @@
         "button": "Save",
         "updated": "Settings updated!",
         "placeholder": {
-            "username": "Enter a username here"
+            "username": "Username"
         }
     },
     "errors": {
