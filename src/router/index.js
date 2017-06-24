@@ -11,7 +11,7 @@ const Search = resolve => require(['../components/views/Search'], resolve);
 
 const MyBlueprints = resolve => require(['../components/views/MyBlueprints'], resolve);
 const View = resolve => require(['../components/views/View'], resolve);
-const Create = resolve => require(['../components/views/Create'], resolve);
+const CreateBlueprint = resolve => require(['../components/views/CreateBlueprint'], resolve);
 
 Vue.use(Router);
 
@@ -49,7 +49,7 @@ const router = new Router({
     {
       path: '/blueprints/create',
       name: 'blueprints-create',
-      component: Create,
+      component: CreateBlueprint,
       meta: { auth: true }
     },
     {
