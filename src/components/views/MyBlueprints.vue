@@ -10,16 +10,16 @@
         <div v-if="loading">
           <loader></loader>
         </div>
-        <div v-else-if="rows.length > 0">
-          <md-layout
-            v-for="(row, ridx) in rows"
-            :key="ridx"
-            md-row>
+        <div v-else-if="blueprints.length > 0">
+          <md-layout md-row>
             <md-layout
-              class="card-rows"
-              v-for="(blueprint, bidx) in row"
-              :key="blueprint.id"
-              :md-flex="percentage">
+              v-for="(blueprint, bidx) in blueprints"
+              :key="'blueprint'+bidx"
+              md-flex-xsmall="100"
+              md-flex-small="50"
+              md-flex-medium="50"
+              md-flex-large="25"
+              md-flex-xlarge="20">
               <blueprint-card
                 :id="blueprint.id"
                 :revision="1"
@@ -40,8 +40,6 @@
   import BlueprintCard from '../partials/BlueprintCard';
   import axios from '../../api/blooper';
 
-  const ITEMS_PER_ROW = 4;
-
   export default {
     name: 'my-blueprints-view',
     components: {
@@ -52,20 +50,8 @@
     data() {
       return {
         loading: true,
-        percentage: 100 / ITEMS_PER_ROW,
         blueprints: []
       };
-    },
-    computed: {
-      rows() {
-        const blueprints = this.blueprints;
-        // eslint-disable-next-line
-        return blueprints.map((e, i, a) => {
-          return i % ITEMS_PER_ROW
-            ? null
-            : a.slice(i, i + ITEMS_PER_ROW);
-        }).filter(e => e);
-      }
     },
     mounted() {
       axios
