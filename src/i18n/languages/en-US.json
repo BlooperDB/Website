@@ -62,6 +62,7 @@
         "106": "Error: That username is already taken!",
         "200": "Error: Blueprint not found",
         "300": "Error: Blueprint revision not found",
-        "400": "Error: Blueprint comment not found"
+        "400": "Error: Blueprint comment not found",
+        "500": "Error: No search terms given"
     }
 }
