@@ -2,8 +2,8 @@ import * as types from '../types';
 
 const state = {
   firebaseIdToken: null, // ID obtained from Google SSO
-  blooperToken: null,    // Blooper Token obtained from API
-  user: null             // User object obtained from API
+  blooperToken: null, // Blooper Token obtained from API
+  user: null // User object obtained from API
 };
 
 const getters = {

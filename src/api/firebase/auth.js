@@ -1,4 +1,6 @@
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
 import firebaseui from 'firebaseui';
 
 import router from '../../router/index';
