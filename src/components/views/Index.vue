@@ -33,7 +33,7 @@
     padding: 100px 0;
     text-align: center;
     color: #FFF;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 3px 1px rgba(0, 0, 0, 0.12), 0 2px 1px rgba(0, 0, 0, 0.24);
 
     h1 {
       font-size: 3em;
