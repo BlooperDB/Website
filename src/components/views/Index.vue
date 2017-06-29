@@ -13,7 +13,7 @@
         <h1>{{ $t('index.popularBlueprints') }}</h1>
 
         <div v-if="loading">
-          <loader></loader> <!-- TODO Make the loader appear in correct section  -->
+          <loader not-center></loader>
         </div>
         <div v-else-if="blueprints.length > 0">
           <md-layout md-row>

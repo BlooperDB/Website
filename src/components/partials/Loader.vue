@@ -12,12 +12,17 @@
 
 <style lang="scss" scoped>
   .loading-icon {
-    flex: 1;
-    height: 100%;
-    width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &:not([not-center]) {
+      flex: 1;
+      height: 100%;
+      width: 100%;
+    }
+
 
     img {
       animation: rotate 3s infinite;
