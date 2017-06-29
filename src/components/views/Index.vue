@@ -11,6 +11,27 @@
     <section id="popular">
       <container>
         <h1>{{ $t('index.popularBlueprints') }}</h1>
+
+        <div v-if="loading">
+          <loader></loader> <!-- TODO Make the loader appear in correct section  -->
+        </div>
+        <div v-else-if="blueprints.length > 0">
+          <md-layout md-row>
+            <md-layout
+              v-for="(blueprint, bidx) in blueprints"
+              :key="'blueprint'+bidx"
+              md-flex-xsmall="100"
+              md-flex-small="50"
+              md-flex-medium="50"
+              md-flex-large="25"
+              md-flex-xlarge="20">
+              <blueprint-card
+                :id="blueprint.id"
+                :revision="1"
+                :initialBlueprint="blueprint"></blueprint-card>
+            </md-layout>
+          </md-layout>
+        </div>
       </container>
     </section>
   </div>
@@ -18,11 +39,35 @@
 
 <script>
   import Container from '../partials/Container';
+  import Loader from '../partials/Loader';
+  import BlueprintCard from '../partials/BlueprintCard';
+  import axios from '../../api/blooper';
 
   export default {
     name: 'index-view',
     components: {
-      Container
+      Container,
+      BlueprintCard,
+      Loader
+    },
+    data() {
+      return {
+        loading: true,
+        blueprints: []
+      };
+    },
+    mounted() {
+      axios
+        .get('/v1/blueprints/popular')
+        .then((response) => {
+          if (response.data.success) {
+            const data = response.data.data;
+            this.blueprints = data.blueprints;
+            // eslint-disable-next-line no-console
+            console.log(data.blueprints);
+          }
+          this.loading = false;
+        });
     }
   };
 </script>
