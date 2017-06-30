@@ -48,7 +48,7 @@
     methods: {
       onSubmit() {
         axios
-          .put('/v1/user', {
+          .put('/v1/user/self', {
             username: this.username
           })
           .then((response) => {
