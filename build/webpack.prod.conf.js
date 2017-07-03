@@ -102,7 +102,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
       stripPrefix: 'dist/'
-    })
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ]
 });
 
