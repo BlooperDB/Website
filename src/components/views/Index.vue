@@ -63,8 +63,6 @@
           if (response.data.success) {
             const data = response.data.data;
             this.blueprints = data.blueprints;
-            // eslint-disable-next-line no-console
-            console.log(data.blueprints);
           }
           this.loading = false;
         });

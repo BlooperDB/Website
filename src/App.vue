@@ -46,7 +46,6 @@
 
   .router-view {
     flex: 1;
-    position: relative;
   }
 
   .page-enter-active, .page-leave-active {

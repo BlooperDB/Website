@@ -35,6 +35,12 @@ const router = new Router({
       props: true
     },
     {
+      path: '/view/:id/revision/:revision',
+      name: 'view-revision',
+      component: View,
+      props: true
+    },
+    {
       path: '/search/:query?',
       name: 'search',
       component: Search,

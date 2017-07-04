@@ -1,5 +1,5 @@
 <template>
-  <md-card md-with-hover class="blueprint-card" style="position: relative; width: 100%;">
+  <md-card v-if="blueprint" md-with-hover class="blueprint-card" style="position: relative; width: 100%;">
     <router-link :to="`/view/${blueprint.id}`">
       <md-card-media-cover md-text-scrim>
         <md-card-media md-ratio="1:1">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import axios from '../../api/blooper';
+  import { getBlueprint } from '../../api/blooper/blueprint';
 
   export default {
     name: 'blueprint-card',
@@ -50,10 +50,9 @@
         blueprint: this.initialBlueprint
       };
     },
-    mounted() {
+    beforeMount() {
       if (!this.blueprint) {
-        axios
-          .get(`/v1/blueprint/${this.id}/revision/${this.revision}`)
+        getBlueprint(this.id)
           .then((response) => {
             if (response.data.success) {
               this.blueprint = response.data.data;
