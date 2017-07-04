@@ -38,7 +38,7 @@
 
                         <md-card-area>
                           <md-card-header>
-                            <div class="md-title">Version {{ revision.version }}</div>
+                            <div class="md-title">Revision {{ revision.revision }}</div>
                           </md-card-header>
                         </md-card-area>
                       </md-card-media-cover>
