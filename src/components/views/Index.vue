@@ -10,7 +10,13 @@
     </section>
     <section id="popular">
       <container>
-        <h1>{{ $t('index.popularBlueprints') }}</h1>
+        <md-input-container>
+          <md-select name="sorting" id="sorting" v-model="sorting">
+            <md-option value="popular">{{ $t('index.popularBlueprints') }}</md-option>
+            <md-option value="top">{{ $t('index.topBlueprints') }}</md-option>
+            <md-option value="new">{{ $t('index.newBlueprints') }}</md-option>
+          </md-select>
+        </md-input-container>
 
         <div v-if="loading">
           <loader not-center></loader>
@@ -53,7 +59,8 @@
     data() {
       return {
         loading: true,
-        blueprints: []
+        blueprints: [],
+        sorting: 'popular'
       };
     },
     mounted() {
@@ -66,6 +73,35 @@
           }
           this.loading = false;
         });
+    },
+    watch: {
+      sorting() {
+        this.blueprints = [];
+        this.loading = true;
+
+        let url = '/v1/blueprints';
+        switch (this.sorting) {
+          case 'top':
+            url += '/top';
+            break;
+          case 'new':
+            url += '/new';
+            break;
+          default:
+            url += '/popular';
+            break;
+        }
+
+        axios
+          .get(url)
+          .then((response) => {
+            if (response.data.success) {
+              const data = response.data.data;
+              this.blueprints = data.blueprints;
+            }
+            this.loading = false;
+          });
+      }
     }
   };
 </script>
@@ -106,5 +142,22 @@
 
   #popular {
     margin-top: 40px;
+
+    .md-input-container {
+
+      width: auto;
+
+      &:after {
+        background: 0;
+      }
+
+      .md-select {
+        width: auto;
+      }
+    }
+
+    .md-theme-default.md-select:after {
+      color: #fff;
+    }
   }
 </style>

@@ -29,11 +29,12 @@
                   md-flex-large="25"
                   md-flex-xlarge="20">
 
-                  <md-card md-with-hover class="blueprint-card" style="position: relative; width: 100%;">
+                  <md-card md-with-hover class="revision-card" style="position: relative; width: 100%;">
                     <router-link :to="`/view/${blueprint.id}/revision/${revision.id}`">
                       <md-card-media-cover md-text-scrim>
                         <md-card-media md-ratio="1:1">
-                          <img src="../../assets/img/logo.svg" style="padding: 15px; background-color: #e44;">
+                          <img src="../../assets/img/logo.svg" style=" padding: 15px;">
+                          <img :src="revision.thumbnail" v-bind:class="{ hidden: revision.thumbnail == null }">
                         </md-card-media>
 
                         <md-card-area>
@@ -62,6 +63,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import { getUser } from '../../api/blooper/user';
   import { getBlueprint, getRevisions } from '../../api/blooper/blueprint';
 
@@ -82,7 +84,7 @@
     data() {
       return {
         blueprint: null,
-        revisions: {},
+        revisions: [],
         author: null
       };
     },
@@ -100,6 +102,14 @@
       getRevisions(this.id)
         .then((revisions) => {
           this.revisions = revisions;
+          this.revisions.forEach((r) => {
+            axios
+              .head(r.thumbnail)
+              .then(() => {
+                this.thumbnailURL = r.thumbnail;
+              })
+              .catch(() => {});
+          });
         });
     }
   };
@@ -112,7 +122,7 @@
     font-weight: normal;
   }
 
-  .blueprint-card {
+  .revision-card {
     margin: 8px;
     color: #333;
     background-color: #fff;
@@ -120,6 +130,15 @@
     a:not(.md-button) {
       color: #333;
       text-decoration: none;
+    }
+
+    .hidden {
+      opacity: 0;
+    }
+
+    img {
+      transition:opacity 0.5s linear;
+      background-color: rgb(40, 40, 40);
     }
   }
 

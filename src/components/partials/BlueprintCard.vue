@@ -3,7 +3,8 @@
     <router-link :to="`/view/${blueprint.id}`">
       <md-card-media-cover md-text-scrim>
         <md-card-media md-ratio="1:1">
-          <img src="../../assets/img/logo.svg" style="padding: 15px; background-color: #e44;">
+            <img src="../../assets/img/logo.svg" style=" padding: 15px;">
+            <img :src="thumbnail" v-bind:class="{ hidden: thumbnail == null }">
         </md-card-media>
 
         <md-card-area>
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import { getBlueprint } from '../../api/blooper/blueprint';
 
   export default {
@@ -47,7 +49,8 @@
     },
     data() {
       return {
-        blueprint: this.initialBlueprint
+        blueprint: this.initialBlueprint,
+        thumbnail: null
       };
     },
     beforeMount() {
@@ -59,6 +62,13 @@
             }
           });
       }
+
+      axios
+        .head(this.blueprint.thumbnail)
+        .then(() => {
+          this.thumbnail = this.blueprint.thumbnail;
+        })
+        .catch(() => {});
     }
   };
 </script>
@@ -72,6 +82,15 @@
     a:not(.md-button) {
       color: #333;
       text-decoration: none;
+    }
+
+    .hidden {
+      opacity: 0;
+    }
+
+    img {
+      transition:opacity 0.5s linear;
+      background-color: rgb(40, 40, 40);
     }
   }
 

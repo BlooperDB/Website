@@ -1,7 +1,9 @@
 {
     "index": {
         "slogan": "Download and share Factorio blueprints.",
-        "popularBlueprints": "Popular Blueprints"
+        "popularBlueprints": "Popular Blueprints",
+        "topBlueprints": "Top Blueprints",
+        "newBlueprints": "New Blueprints"
     },
     "state": {
         "loading": "Loading..."

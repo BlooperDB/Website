@@ -113,3 +113,14 @@ h1 {
 .md-theme-default.md-button:not([disabled]).md-primary.md-raised {
   background: linear-gradient(to right, #357aff, #418eff);
 }
+
+#popular {
+  margin-top: 40px;
+
+  .md-select-value {
+    font-size: 3em;
+    font-weight: 100;
+    font-family: "Roboto", sans-serif;
+    height: 40px;
+  }
+}
