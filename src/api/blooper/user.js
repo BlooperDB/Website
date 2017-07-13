@@ -47,6 +47,12 @@ export function getUser(user) {
     .then(response => response.data.data);
 }
 
+export function getUserBlueprints(user) {
+  return axios
+    .get(`/v1/user/${user}/blueprints`)
+    .then(response => response.data.data.blueprints);
+}
+
 export function logout(func) {
   auth.signOut()
     .then(() => {

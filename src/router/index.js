@@ -29,13 +29,13 @@ const router = new Router({
       component: Login
     },
     {
-      path: '/view/:id',
+      path: '/view/:blueprintId',
       name: 'view',
       component: View,
       props: true
     },
     {
-      path: '/view/:id/revision/:revision',
+      path: '/view/:blueprintId/revision/:revisionId',
       name: 'view-revision',
       component: View,
       props: true

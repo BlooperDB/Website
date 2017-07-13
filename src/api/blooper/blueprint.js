@@ -21,6 +21,12 @@ export function getBlueprint(blueprint) {
     .then(response => response.data.data);
 }
 
+export function getBlueprintRevision(blueprint, revision) {
+  return axios
+    .get(`/v1/blueprint/${blueprint}/revision/${revision}`)
+    .then(response => response.data.data);
+}
+
 export function getRevisions(blueprint) {
   return axios
     .get(`/v1/blueprint/${blueprint}/revisions`)

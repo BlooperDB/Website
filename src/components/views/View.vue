@@ -7,7 +7,7 @@
       <section id="blueprintInfo">
         <md-tabs md-fixed>
           <md-tab :md-label="$t('view.tabs.overview')">
-            <container>
+            <container v-if="blueprint">
               <h1 class="blueprint-name">
                 {{ blueprint.name }}
                 <span v-if="author" class="subheader">{{ $t('view.overview.by') }} <router-link
@@ -22,7 +22,7 @@
               <md-layout md-row>
                 <md-layout
                   v-for="(revision, index) in revisions"
-                  :key="index"
+                  :key="'rev'+index"
                   md-flex-xsmall="100"
                   md-flex-small="50"
                   md-flex-medium="50"
@@ -30,11 +30,11 @@
                   md-flex-xlarge="20">
 
                   <md-card md-with-hover class="revision-card" style="position: relative; width: 100%;">
-                    <router-link :to="`/view/${blueprint.id}/revision/${revision.id}`">
+                    <router-link :to="`/view/${blueprint.id}/revision/${revision.revision}`">
                       <md-card-media-cover md-text-scrim>
                         <md-card-media md-ratio="1:1">
                           <img src="../../assets/img/logo.svg" style=" padding: 15px;">
-                          <img :src="revision.thumbnail" v-bind:class="{ hidden: revision.thumbnail == null }">
+                          <img :src="revision.thumbnail" v-show="revision.thumbnail">
                         </md-card-media>
 
                         <md-card-area>
@@ -51,7 +51,36 @@
           </md-tab>
 
           <md-tab :md-label="$t('view.tabs.moreFromUser')">
+            <container v-if="moreFromUser">
+              <md-layout md-row>
+                <md-layout
+                  v-for="(blueprint, index) in moreFromUser"
+                  :key="'userbp'+index"
+                  md-flex-xsmall="100"
+                  md-flex-small="50"
+                  md-flex-medium="50"
+                  md-flex-large="25"
+                  md-flex-xlarge="20">
 
+                  <md-card md-with-hover class="revision-card" style="position: relative; width: 100%;">
+                    <router-link :to="`/view/${blueprint.id}`">
+                      <md-card-media-cover md-text-scrim>
+                        <md-card-media md-ratio="1:1">
+                          <img src="../../assets/img/logo.svg" style="padding: 15px;">
+                          <img :src="blueprint.thumbnail" v-show="blueprint.thumbnail">
+                        </md-card-media>
+
+                        <md-card-area>
+                          <md-card-header>
+                            <div class="md-title">{{ blueprint.name }}</div>
+                          </md-card-header>
+                        </md-card-area>
+                      </md-card-media-cover>
+                    </router-link>
+                  </md-card>
+                </md-layout>
+              </md-layout>
+            </container>
           </md-tab>
         </md-tabs>
       </section>
@@ -64,8 +93,8 @@
 
 <script>
   import axios from 'axios';
-  import { getUser } from '../../api/blooper/user';
-  import { getBlueprint, getRevisions } from '../../api/blooper/blueprint';
+  import { getUser, getUserBlueprints } from '../../api/blooper/user';
+  import { getBlueprint, getBlueprintRevision, getRevisions } from '../../api/blooper/blueprint';
 
   import BlueprintCard from '../partials/BlueprintCard';
   import BlueprintPreview from '../partials/BlueprintPreview';
@@ -74,7 +103,7 @@
 
   export default {
     name: 'view-view',
-    props: ['id', 'revision'],
+    props: ['blueprintId', 'revisionId'],
     components: {
       BlueprintCard,
       BlueprintPreview,
@@ -84,13 +113,15 @@
     data() {
       return {
         blueprint: null,
+        revision: null,
         revisions: [],
+        moreFromUser: null,
         author: null,
         blueprintRender: null
       };
     },
     mounted() {
-      getBlueprint(this.id)
+      getBlueprint(this.blueprintId)
         .then((blueprint) => {
           this.blueprint = blueprint;
 
@@ -98,22 +129,45 @@
             .then((author) => {
               this.author = author;
             });
+
+          getUserBlueprints(blueprint.user)
+            .then((blueprints) => {
+              this.moreFromUser = blueprints;
+              this.moreFromUser.forEach((b) => {
+                axios
+                  .head(b.thumbnail)
+                  .then(() => {})
+                  .catch(() => {
+                    b.thumbnail = undefined;
+                  });
+              });
+            });
+
+          if (this.revisionId === undefined) {
+            getBlueprintRevision(this.blueprintId, this.blueprint['latest-revision'])
+              .then((revision) => {
+                this.revision = revision;
+                this.blueprintRender = revision.render;
+              });
+          }
         });
 
-      getRevisions(this.id)
+      if (this.revisionId !== undefined) {
+        getBlueprintRevision(this.blueprintId, this.revisionId)
+          .then((revision) => {
+            this.revision = revision;
+            this.blueprintRender = revision.render;
+          });
+      }
+
+      getRevisions(this.blueprintId)
         .then((revisions) => {
           this.revisions = revisions;
           this.revisions.forEach((r) => {
             axios
               .head(r.thumbnail)
-              .then(() => {
-                this.thumbnailURL = r.thumbnail;
-              })
+              .then(() => {})
               .catch(() => {});
-
-            if (this.blueprintRender === null) {
-              this.blueprintRender = r.render;
-            }
           });
         });
     }
