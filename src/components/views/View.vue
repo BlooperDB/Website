@@ -2,7 +2,7 @@
   <div>
     <template v-if="blueprint">
       <section id="blueprintPreview">
-        <blueprint-preview></blueprint-preview>
+        <blueprint-preview :blueprint="blueprintRender"></blueprint-preview>
       </section>
       <section id="blueprintInfo">
         <md-tabs md-fixed>
@@ -85,7 +85,8 @@
       return {
         blueprint: null,
         revisions: [],
-        author: null
+        author: null,
+        blueprintRender: null
       };
     },
     mounted() {
@@ -109,6 +110,10 @@
                 this.thumbnailURL = r.thumbnail;
               })
               .catch(() => {});
+
+            if (this.blueprintRender === null) {
+              this.blueprintRender = r.render;
+            }
           });
         });
     }

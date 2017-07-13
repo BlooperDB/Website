@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import Container from './Container';
 
   export default {
@@ -20,7 +21,11 @@
     components: {
       Container
     },
-    props: ['blueprint'],
+    props: {
+      blueprint: {
+        required: true
+      }
+    },
     data() {
       return {
         dimensions: {
@@ -30,8 +35,9 @@
         parent: null,
         canvas: null,
         ctx: null,
-        placeholderText: 'This will eventually render the Factorio blueprint.',
-        fullscreen: false
+        placeholderText: 'Loading...',
+        fullscreen: false,
+        renderImage: null
       };
     },
     mounted() {
@@ -43,6 +49,10 @@
 
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
+
+      if (this.blueprint !== null) {
+        this.loadBlueprintImage();
+      }
 
       this.draw();
     },
@@ -70,20 +80,49 @@
         requestAnimationFrame(() => {
           this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
 
-          this.ctx.fillStyle = '#999';
+          if (this.renderImage === null) {
+            this.ctx.fillStyle = '#999';
+          } else {
+            this.ctx.fillStyle = '#282828';
+          }
+
           this.ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
 
-          this.ctx.fillStyle = '#FFF';
-          this.ctx.textAlign = 'center';
-          this.ctx.font = '20px Roboto';
-          this.ctx.fillText(this.placeholderText,
-            this.dimensions.width / 2, this.dimensions.height / 2);
+          if (this.renderImage === null) {
+            this.ctx.fillStyle = '#FFF';
+            this.ctx.textAlign = 'center';
+            this.ctx.font = '20px Roboto';
+            this.ctx.fillText(this.placeholderText,
+              this.dimensions.width / 2, this.dimensions.height / 2);
+          } else {
+            const dx = (this.dimensions.width / 2) - (this.renderImage.width / 2);
+            const dy = (this.dimensions.height / 2) - (this.renderImage.height / 2);
+
+            this.ctx.drawImage(this.renderImage, dx, dy);
+          }
 
           this.draw();
         });
       },
       setFullscreen(fullscreen) {
         this.fullscreen = fullscreen;
+      },
+      loadBlueprintImage() {
+        axios
+          .head(this.blueprint)
+          .then(() => {
+            const render = new Image();
+            render.src = this.blueprint;
+            render.onload = () => {
+              this.renderImage = render;
+            };
+          })
+          .catch(() => {});
+      }
+    },
+    watch: {
+      blueprint() {
+        this.loadBlueprintImage();
       }
     }
   };
