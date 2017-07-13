@@ -149,7 +149,6 @@
       left: 0;
       right: 0;
       margin: auto;
-      cursor: move;
     }
 
     .blueprint-controls {
