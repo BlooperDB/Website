@@ -8,12 +8,26 @@
         <md-tabs md-fixed>
           <md-tab :md-label="$t('view.tabs.overview')">
             <container v-if="blueprint">
-              <h1 class="blueprint-name">
-                {{ blueprint.name }}
-                <span v-if="author" class="subheader">{{ $t('view.overview.by') }} <router-link
-                  :to="`/user/${author.id}`">{{ author.username }}</router-link></span>
-              </h1>
-              <p>{{ blueprint.description }}</p>
+              <md-layout md-column-small>
+                <md-layout>
+                  <div>
+                    <h1 class="blueprint-name">
+                      {{ blueprint.name }}
+                      <span v-if="author" class="subheader">{{ $t('view.overview.by') }} <router-link
+                        :to="`/user/${author.id}`">{{ author.username }}</router-link></span>
+                    </h1>
+                    <p>{{ blueprint.description }}</p>
+                  </div>
+                </md-layout>
+                <md-layout md-flex="25">
+                  <div class="sidebar-container">
+                    <md-button class="md-raised md-primary blueprint-copy" v-clipboard="blueprintString">
+                      <md-icon>content_copy</md-icon>
+                      <span>Copy Blueprint</span>
+                    </md-button>
+                  </div>
+                </md-layout>
+              </md-layout>
             </container>
           </md-tab>
 
@@ -117,7 +131,8 @@
         revisions: [],
         moreFromUser: null,
         author: null,
-        blueprintRender: null
+        blueprintRender: null,
+        blueprintString: null
       };
     },
     mounted() {
@@ -148,6 +163,12 @@
               .then((revision) => {
                 this.revision = revision;
                 this.blueprintRender = revision.render;
+
+                axios
+                  .get(this.revision.blueprint)
+                  .then((blueprintString) => {
+                    this.blueprintString = blueprintString.data;
+                  });
               });
           }
         });
@@ -157,6 +178,12 @@
           .then((revision) => {
             this.revision = revision;
             this.blueprintRender = revision.render;
+
+            axios
+              .get(this.revision.blueprint)
+              .then((blueprintString) => {
+                this.blueprintString = blueprintString.data;
+              });
           });
       }
 
@@ -205,5 +232,16 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+  }
+
+  .sidebar-container {
+    width: 100%;
+    margin-top: 34px;
+  }
+
+  .blueprint-copy {
+    display: block;
+    width: 100%;
+    margin: 0;
   }
 </style>
