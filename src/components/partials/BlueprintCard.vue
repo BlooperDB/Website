@@ -1,7 +1,7 @@
 <template>
   <md-card v-if="blueprint" md-with-hover class="blueprint-card" style="position: relative; width: 100%;">
     <router-link :to="`/view/${blueprint.id}`">
-      <md-card-media-cover md-text-scrim>
+      <md-card-media-cover md-text-scrim style="background-color: #333">
         <md-card-media md-ratio="1:1">
             <img src="../../assets/img/logo.svg" style=" padding: 15px;">
             <img :src="thumbnail" v-bind:class="{ hidden: thumbnail == null }">
@@ -17,7 +17,7 @@
             <div>
               <md-chip
                 v-for="(tag, idx) in blueprint.tags"
-                :key="idx"
+                :key="'tag'+idx"
                 style="margin-left: 5px">{{ tag }}
               </md-chip>
             </div>

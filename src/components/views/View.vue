@@ -45,9 +45,9 @@
 
                   <md-card md-with-hover class="revision-card" style="position: relative; width: 100%;">
                     <router-link :to="`/view/${blueprint.id}/revision/${revision.revision}`">
-                      <md-card-media-cover md-text-scrim>
+                      <md-card-media-cover md-text-scrim style="background-color: #333">
                         <md-card-media md-ratio="1:1">
-                          <img src="../../assets/img/logo.svg" style=" padding: 15px;">
+                          <img src="../../assets/img/logo.svg" style="padding: 15px;">
                           <img :src="revision.thumbnail" v-show="revision.thumbnail">
                         </md-card-media>
 
@@ -74,24 +74,17 @@
                   md-flex-small="50"
                   md-flex-medium="50"
                   md-flex-large="25"
-                  md-flex-xlarge="20">
+                  md-flex-xlarge="20"
+                  style="padding: 15px; width: 100%">
 
-                  <md-card md-with-hover class="revision-card" style="position: relative; width: 100%;">
-                    <router-link :to="`/view/${blueprint.id}`">
-                      <md-card-media-cover md-text-scrim>
-                        <md-card-media md-ratio="1:1">
-                          <img src="../../assets/img/logo.svg" style="padding: 15px;">
-                          <img :src="blueprint.thumbnail" v-show="blueprint.thumbnail">
-                        </md-card-media>
-
-                        <md-card-area>
-                          <md-card-header>
-                            <div class="md-title">{{ blueprint.name }}</div>
-                          </md-card-header>
-                        </md-card-area>
-                      </md-card-media-cover>
-                    </router-link>
-                  </md-card>
+                  <router-link :to="`/view/${blueprint.id}`" style="width: 100%">
+                    <blueprint-card
+                      :id="blueprint.id"
+                      :revision="blueprint['latest-revision']"
+                      :initialBlueprint="blueprint"
+                      style="width: 100%"
+                      ></blueprint-card>
+                  </router-link>
                 </md-layout>
               </md-layout>
             </container>
@@ -117,7 +110,15 @@
 
   export default {
     name: 'view-view',
-    props: ['blueprintId', 'revisionId'],
+    props: {
+      blueprintId: {
+        required: true,
+        type: Number
+      },
+      revisionId: {
+        type: Number
+      }
+    },
     components: {
       BlueprintCard,
       BlueprintPreview,
@@ -147,7 +148,7 @@
 
           getUserBlueprints(blueprint.user)
             .then((blueprints) => {
-              this.moreFromUser = blueprints;
+              this.moreFromUser = blueprints.filter(b => b.id !== blueprint.id);
               this.moreFromUser.forEach((b) => {
                 axios
                   .head(b.thumbnail)
