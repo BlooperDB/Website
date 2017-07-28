@@ -112,12 +112,9 @@
     name: 'view-view',
     props: {
       blueprintId: {
-        required: true,
-        type: Number
+        required: true
       },
-      revisionId: {
-        type: Number
-      }
+      revisionId: {}
     },
     components: {
       BlueprintCard,
@@ -137,67 +134,79 @@
       };
     },
     mounted() {
-      getBlueprint(this.blueprintId)
-        .then((blueprint) => {
-          this.blueprint = blueprint;
+      this.reloadBlueprint();
+    },
+    methods: {
+      reloadBlueprint() {
+        getBlueprint(this.blueprintId)
+          .then((blueprint) => {
+            this.blueprint = blueprint;
 
-          getUser(blueprint.user)
-            .then((author) => {
-              this.author = author;
+            getUser(blueprint.user)
+              .then((author) => {
+                this.author = author;
+              });
+
+            getUserBlueprints(blueprint.user)
+              .then((blueprints) => {
+                this.moreFromUser = blueprints.filter(b => b.id !== blueprint.id);
+                this.moreFromUser.forEach((b) => {
+                  axios
+                    .head(b.thumbnail)
+                    .then(() => {})
+                    .catch(() => {
+                      b.thumbnail = undefined;
+                    });
+                });
+              });
+
+            if (this.revisionId === undefined) {
+              getBlueprintRevision(this.blueprintId, this.blueprint['latest-revision'])
+                .then((revision) => {
+                  this.revision = revision;
+                  this.blueprintRender = revision.render;
+
+                  axios
+                    .get(this.revision.blueprint)
+                    .then((blueprintString) => {
+                      this.blueprintString = blueprintString.data;
+                    });
+                });
+            }
+          });
+
+        if (this.revisionId !== undefined) {
+          getBlueprintRevision(this.blueprintId, this.revisionId)
+            .then((revision) => {
+              this.revision = revision;
+              this.blueprintRender = revision.render;
+
+              axios
+                .get(this.revision.blueprint)
+                .then((blueprintString) => {
+                  this.blueprintString = blueprintString.data;
+                });
             });
+        }
 
-          getUserBlueprints(blueprint.user)
-            .then((blueprints) => {
-              this.moreFromUser = blueprints.filter(b => b.id !== blueprint.id);
-              this.moreFromUser.forEach((b) => {
-                axios
-                  .head(b.thumbnail)
-                  .then(() => {})
-                  .catch(() => {
-                    b.thumbnail = undefined;
-                  });
-              });
+        getRevisions(this.blueprintId)
+          .then((revisions) => {
+            this.revisions = revisions;
+            this.revisions.forEach((r) => {
+              axios
+                .head(r.thumbnail)
+                .then(() => {})
+                .catch(() => {});
             });
-
-          if (this.revisionId === undefined) {
-            getBlueprintRevision(this.blueprintId, this.blueprint['latest-revision'])
-              .then((revision) => {
-                this.revision = revision;
-                this.blueprintRender = revision.render;
-
-                axios
-                  .get(this.revision.blueprint)
-                  .then((blueprintString) => {
-                    this.blueprintString = blueprintString.data;
-                  });
-              });
-          }
-        });
-
-      if (this.revisionId !== undefined) {
-        getBlueprintRevision(this.blueprintId, this.revisionId)
-          .then((revision) => {
-            this.revision = revision;
-            this.blueprintRender = revision.render;
-
-            axios
-              .get(this.revision.blueprint)
-              .then((blueprintString) => {
-                this.blueprintString = blueprintString.data;
-              });
           });
       }
-
-      getRevisions(this.blueprintId)
-        .then((revisions) => {
-          this.revisions = revisions;
-          this.revisions.forEach((r) => {
-            axios
-              .head(r.thumbnail)
-              .then(() => {})
-              .catch(() => {});
-          });
-        });
+    },
+    watch: {
+      $route(to) {
+        this.blueprintId = to.params.blueprintId;
+        this.reloadBlueprint();
+        // TODO Move to first tab
+      }
     }
   };
 </script>
