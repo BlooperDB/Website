@@ -13,6 +13,8 @@ const MyBlueprints = resolve => require(['../components/views/MyBlueprints'], re
 const View = resolve => require(['../components/views/View'], resolve);
 const CreateBlueprint = resolve => require(['../components/views/CreateBlueprint'], resolve);
 
+const Recipes = resolve => require(['../components/views/Recipes'], resolve);
+
 Vue.use(Router);
 
 const router = new Router({
@@ -63,6 +65,11 @@ const router = new Router({
       name: 'settings',
       component: Settings,
       meta: { auth: true }
+    },
+    {
+      path: '/tools/recipes',
+      name: 'recipes',
+      component: Recipes
     }
 
   ]

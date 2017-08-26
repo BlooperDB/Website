@@ -16,7 +16,10 @@
         "menu": {
             "blueprints": "My Blueprints",
             "settings": "Settings",
-            "signOut": "Sign out"
+            "signOut": "Sign out",
+            "tools": {
+                "recipes": "Recipes"
+            }
         }
     },
     "footer": {
