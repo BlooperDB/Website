@@ -37,6 +37,7 @@
   /* eslint-disable */
 
   import axios from 'axios';
+  import pluralize from 'pluralize';
   import * as d3 from "d3";
   import Container from '../partials/Container';
   import TextInput from '../partials/TextInput';
@@ -153,7 +154,7 @@
               Object.keys(d.data.moveSpeeds).sort((a, b) => {
                 return d.data.moveSpeeds[a] - d.data.moveSpeeds[b]
               }).forEach((belt) => {
-                html += self.language[belt] + ": " + d.data.moveSpeeds[belt] + "<br>"
+                html += pluralize.plural(self.language[belt]) + ": " + d.data.moveSpeeds[belt] + "<br>"
               });
             }
 
@@ -185,7 +186,17 @@
             Object.keys(d.data.craftSpeeds).sort((a, b) => {
               return d.data.craftSpeeds[a] - d.data.craftSpeeds[b]
             }).forEach((machine) => {
-              html += self.language[machine] + ": " + d.data.craftSpeeds[machine] + "<br>"
+              let name = self.language[machine];
+
+              const matches = name.match(/\d+$/);
+              if (matches) {
+                const number = matches[0];
+                name = pluralize.plural(name.substring(0, name.length - 2)) + " " + number;
+              }else{
+                name = pluralize.plural(name)
+              }
+
+              html += name + ": " + d.data.craftSpeeds[machine] + "<br>"
             });
 
             tooltip.transition()
