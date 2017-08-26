@@ -9,7 +9,7 @@
       <loader v-if="loading"></loader>
       <container v-if="!loading">
         <md-layout :md-gutter="8">
-          <md-layout md-flex="25">
+          <md-layout md-flex-xsmall="50" md-flex-small="33" md-flex="25">
             <md-input-container>
               <label for="item">Item</label>
               <md-select name="item" id="item" v-model="selectedRecipe">
@@ -17,7 +17,7 @@
               </md-select>
             </md-input-container>
           </md-layout>
-          <md-layout md-flex="25">
+          <md-layout md-flex-xsmall="50" md-flex-small="33" md-flex="25">
             <md-input-container>
               <label>Amount</label>
               <md-input v-model="amount"></md-input>
@@ -25,7 +25,7 @@
           </md-layout>
         </md-layout>
         <div style="width: 100%" id="svgparent">
-          <svg style="width: 100%"></svg>
+          <svg style="width: 100%" id="svg"></svg>
         </div>
         <div id="tooltip" style="opacity: 0;"></div>
       </container>
@@ -38,6 +38,7 @@
 
   import axios from 'axios';
   import pluralize from 'pluralize';
+  import svgPanZoom from 'svg-pan-zoom';
   import * as d3 from "d3";
   import Container from '../partials/Container';
   import TextInput from '../partials/TextInput';
@@ -58,7 +59,8 @@
         selectedRecipe: null,
         items: [],
         sortedItems: [],
-        amount: 1
+        amount: 1,
+        panZoom: null
       };
     },
     watch: {
@@ -94,6 +96,11 @@
        * @param {RecipeTree} data
        */
       update(data) {
+        if(this.panZoom !== null){
+          this.panZoom.destroy();
+          this.panZoom = null;
+        }
+
         var self = this;
 
         let maxTreeWidth = Math.max(...Object.values(data.width(0, {})));
@@ -238,6 +245,17 @@
 
             return text + "/s";
           });
+
+        this.panZoom = svgPanZoom('#svg', {
+          preventMouseEventsDefault: false,
+          contain: true,
+          dblClickZoomEnabled: false
+        });
+        this.panZoom.resize(); // update SVG cached size and controls positions
+        this.panZoom.fit();
+        this.panZoom.center();
+        this.panZoom.enablePan();
+        this.panZoom.enableZoom();
       }
     }
   };
