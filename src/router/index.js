@@ -67,8 +67,8 @@ const router = new Router({
       meta: { auth: true }
     },
     {
-      path: '/tools/recipes',
-      name: 'recipes',
+      path: '/tools/recipes/:recipe?/:amount?',
+      name: 'tools/recipes',
       component: Recipes
     }
 

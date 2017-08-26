@@ -66,9 +66,11 @@
     watch: {
       selectedRecipe () {
         this.update(resolveRecipeTree(this.selectedRecipe, this.amount));
+        this.updateRoute();
       },
       amount () {
         this.update(resolveRecipeTree(this.selectedRecipe, this.amount));
+        this.updateRoute();
       }
     },
     mounted() {
@@ -89,9 +91,20 @@
       ])
         .then(() => {
           this.loading = false;
+          this.$nextTick(function() {
+            this.selectedRecipe = this.$route.params.recipe;
+            this.amount = this.$route.params.amount || 1;
+          })
         })
     },
     methods: {
+      updateRoute() {
+        if (this.$route.name === 'tools/recipes') {
+          this.$router.replace({ name: 'tools/recipes', params: { recipe: this.selectedRecipe, amount: this.amount } });
+        } else {
+          this.$router.push({ name: 'tools/recipes', params: { recipe: this.selectedRecipe, amount: this.amount } });
+        }
+      },
       /**
        * @param {RecipeTree} data
        */
