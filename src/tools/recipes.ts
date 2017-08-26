@@ -241,7 +241,8 @@ function deleteUselessRecipes(data) {
     "fill-lubricant-barrel",
     "fill-petroleum-gas-barrel",
     "fill-sulfuric-acid-barrel",
-    "fill-water-barrel"
+    "fill-water-barrel",
+    "uranium-processing"
   ];
 
   toDelete.forEach(function (value) {
