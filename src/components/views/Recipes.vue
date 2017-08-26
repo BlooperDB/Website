@@ -107,12 +107,15 @@
         var tooltip = d3.select("#tooltip");
 
         var margin = {top: 20, right: 120, bottom: 20, left: 180},
+          width = svg.node().getBoundingClientRect().width,
           height = svg.attr("height") - margin.top - margin.bottom;
+
+        svg.attr("viewBox", "0 0 " + width + " " + height);
 
         var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var tree = d3.cluster()
-          .size([height, svg.node().getBoundingClientRect().width - 160]);
+          .size([height, width - 160]);
 
         var root = d3.hierarchy(data.toChartTree());
         tree(root);
