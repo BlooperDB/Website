@@ -110,7 +110,7 @@
           width = svg.node().getBoundingClientRect().width,
           height = svg.attr("height") - margin.top - margin.bottom;
 
-        svg.attr("viewBox", "0 0 " + width + " " + height);
+        svg.attr("viewBox", "0 0 " + width + " " + svg.attr("height"));
 
         var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
