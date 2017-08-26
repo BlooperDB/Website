@@ -100,7 +100,7 @@
         var svg = d3.select("svg");
         svg.attr("height", Math.max(maxTreeWidth, 5) * 90);
 
-        d3.select("#svgparent").attr("style", "width: 100%; height:" + svg.attr("height"));
+        d3.select("#svgparent").attr("style", "width: 100%; height:" + svg.attr("height") + "px");
 
         svg.selectAll("*").remove();
 
