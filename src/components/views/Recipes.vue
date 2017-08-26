@@ -147,7 +147,7 @@
               + " " + (d.parent.depth * 180) + "," + d.parent.x;
           })
           .on("mouseover", function(d) {
-            let html = "Moving " + d.data.amount + "/s<br>";
+            let html = "Moving " + d.data.amount + "/s<br>Requires:<br>";
 
             if(d.data.item) {
               Object.keys(d.data.moveSpeeds).sort((a, b) => {
@@ -180,7 +180,7 @@
             return "translate(" + (d.depth * 180) + "," + d.x + ")";
           })
           .on("mouseover", function(d) {
-            let html = "Creating " + d.data.amount + "/s<br>";
+            let html = "Creating " + d.data.amount + "/s<br>Requires:<br>";
 
             Object.keys(d.data.craftSpeeds).sort((a, b) => {
               return d.data.craftSpeeds[a] - d.data.craftSpeeds[b]
@@ -271,7 +271,7 @@
     position: absolute;
     text-align: left;
     width: 200px;
-    height: 80px;
+    height: 85px;
     padding: 6px;
     font: 12px sans-serif;
     background: #222;
