@@ -24,7 +24,9 @@
             </md-input-container>
           </md-layout>
         </md-layout>
-        <svg width="1500"></svg>
+        <div style="width: 100%" id="svgparent">
+          <svg style="width: 100%"></svg>
+        </div>
         <div id="tooltip" style="opacity: 0;"></div>
       </container>
     </section>
@@ -98,18 +100,19 @@
         var svg = d3.select("svg");
         svg.attr("height", Math.max(maxTreeWidth, 5) * 90);
 
+        d3.select("#svgparent").attr("style", "width: 100%; height:" + svg.attr("height"));
+
         svg.selectAll("*").remove();
 
         var tooltip = d3.select("#tooltip");
 
         var margin = {top: 20, right: 120, bottom: 20, left: 180},
-          width = svg.attr("width") - margin.right - margin.left,
           height = svg.attr("height") - margin.top - margin.bottom;
 
         var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var tree = d3.cluster()
-          .size([height, width - 160]);
+          .size([height, svg.node().getBoundingClientRect().width - 160]);
 
         var root = d3.hierarchy(data.toChartTree());
         tree(root);
