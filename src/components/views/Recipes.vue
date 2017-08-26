@@ -144,7 +144,9 @@
             let html = "Moving " + d.data.amount + "/s<br>";
 
             if(d.data.item) {
-              Object.keys(d.data.moveSpeeds).forEach((belt) => {
+              Object.keys(d.data.moveSpeeds).sort((a, b) => {
+                return d.data.moveSpeeds[a] - d.data.moveSpeeds[b]
+              }).forEach((belt) => {
                 html += self.language[belt] + ": " + d.data.moveSpeeds[belt] + "<br>"
               });
             }
@@ -174,7 +176,9 @@
           .on("mouseover", function(d) {
             let html = "Creating " + d.data.amount + "/s<br>";
 
-            Object.keys(d.data.craftSpeeds).forEach((machine) => {
+            Object.keys(d.data.craftSpeeds).sort((a, b) => {
+              return d.data.craftSpeeds[a] - d.data.craftSpeeds[b]
+            }).forEach((machine) => {
               html += self.language[machine] + ": " + d.data.craftSpeeds[machine] + "<br>"
             });
 
