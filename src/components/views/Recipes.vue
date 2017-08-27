@@ -277,17 +277,19 @@
               updateSvgClassName();
 
               this.listeners = {
-                click: function(){
-                  svgActive = true;
-                  options.instance.enableZoom();
-                  updateSvgClassName()
-                },
                 mouseleave: function(){
                   svgActive = false;
                   options.instance.disableZoom();
                   updateSvgClassName()
+                },
+                mouseenter: function(){
+                  svgActive = true;
+                  options.instance.enableZoom();
+                  updateSvgClassName()
                 }
               };
+
+              this.listeners.mousemove = this.listeners.mouseenter;
 
               for (const eventName in this.listeners){
                 options.svgElement.addEventListener(eventName, this.listeners[eventName])
@@ -360,7 +362,7 @@
   }
 
   svg {
-    transition: box-shadow 0.3s, background-color 0.3s;
+    transition: box-shadow 0.1s, background-color 0.1s;
   }
 
   svg.active {
