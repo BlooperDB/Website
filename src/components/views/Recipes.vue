@@ -260,10 +260,47 @@
           });
 
         this.panZoom = svgPanZoom('#svg', {
-          preventMouseEventsDefault: false,
+          preventMouseEventsDefault: true,
           contain: true,
-          dblClickZoomEnabled: false
+          dblClickZoomEnabled: false,
+          zoomEnabled: false,
+          maxZoom: 3,
+          customEventsHandler: {
+            init: function(options){
+              let svgActive = false;
+              options.instance.disableZoom();
+
+              function updateSvgClassName(){
+                options.svgElement.setAttribute('class', '' + (svgActive ? 'active':''))
+              }
+
+              updateSvgClassName();
+
+              this.listeners = {
+                click: function(){
+                  svgActive = true;
+                  options.instance.enableZoom();
+                  updateSvgClassName()
+                },
+                mouseleave: function(){
+                  svgActive = false;
+                  options.instance.disableZoom();
+                  updateSvgClassName()
+                }
+              };
+
+              for (const eventName in this.listeners){
+                options.svgElement.addEventListener(eventName, this.listeners[eventName])
+              }
+            }
+            , destroy: function(options){
+              for (const eventName in this.listeners){
+                options.svgElement.removeEventListener(eventName, this.listeners[eventName])
+              }
+            }
+          }
         });
+
         this.panZoom.resize(); // update SVG cached size and controls positions
         this.panZoom.fit();
         this.panZoom.center();
@@ -320,5 +357,14 @@
     border: 2px solid #555;
     opacity: 0.8;
     pointer-events: none;
+  }
+
+  svg {
+    transition: box-shadow 0.3s, background-color 0.3s;
+  }
+
+  svg.active {
+    box-shadow: 0 0 16px 3px #888888;
+    background-color: #464646;
   }
 </style>
