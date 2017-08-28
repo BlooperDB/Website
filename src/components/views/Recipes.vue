@@ -2,7 +2,7 @@
   <div>
     <section id="heading">
       <container>
-        <h1>{{ $t('navbar.menu.tools.recipes') }}</h1>
+        <h1>{{ $t('navbar.menu.tools.recipe_tree') }}</h1>
       </container>
     </section>
     <section>
@@ -269,6 +269,7 @@
             init: function(options){
               let svgActive = false;
               options.instance.disableZoom();
+              options.instance.center();
 
               function updateSvgClassName(){
                 options.svgElement.setAttribute('class', '' + (svgActive ? 'active':''))
@@ -303,11 +304,9 @@
           }
         });
 
-        this.panZoom.resize(); // update SVG cached size and controls positions
+        this.panZoom.resize();
         this.panZoom.fit();
-        this.panZoom.center();
         this.panZoom.enablePan();
-        this.panZoom.enableZoom();
       }
     }
   };

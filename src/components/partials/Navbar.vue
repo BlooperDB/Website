@@ -22,7 +22,7 @@
               <md-icon>account_circle</md-icon>
             </md-button>
 
-            <md-menu-content id="nav-dropdown">
+            <md-menu-content id="nav-dropdown" class="normal-dropdown">
               <router-link to="/blueprints">
                 <md-menu-item>
                   <md-icon>account_circle</md-icon>
@@ -48,6 +48,20 @@
             </md-button>
             <login ref="loginDialog"></login>
           </template>
+
+          <md-menu md-size="4">
+            <md-button class="md-icon-button" md-menu-trigger>
+              <md-icon>build</md-icon>
+            </md-button>
+            <md-menu-content class="normal-dropdown">
+              <router-link to="/tools/recipes">
+                <md-menu-item>
+                  <md-icon>timeline</md-icon>
+                  <span>{{ $t('navbar.menu.tools.recipe_tree') }}</span>
+                </md-menu-item>
+              </router-link>
+            </md-menu-content>
+          </md-menu>
         </div>
       </container>
     </nav>
@@ -128,9 +142,9 @@
 <style lang="scss">
   @import "../../assets/scss/variables";
 
-  #nav-dropdown {
+  .normal-dropdown {
     a {
-      text-decoration: unset;
+      text-decoration: none !important;
 
       span {
         color: black;
