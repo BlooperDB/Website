@@ -36,6 +36,7 @@
 <script>
   /* eslint-disable */
 
+  import Hammer from 'hammerjs';
   import axios from 'axios';
   import pluralize from 'pluralize';
   import svgPanZoom from 'svg-pan-zoom';
@@ -262,44 +263,50 @@
         this.panZoom = svgPanZoom('#svg', {
           preventMouseEventsDefault: true,
           contain: true,
-          dblClickZoomEnabled: false,
-          zoomEnabled: false,
+          dblClickZoomEnabled: true,
+          zoomEnabled: true,
           maxZoom: 3,
           customEventsHandler: {
+            haltEventListeners: ['touchstart', 'touchend', 'touchmove', 'touchleave', 'touchcancel'],
             init: function(options){
-              let svgActive = false;
-              options.instance.disableZoom();
-              options.instance.center();
+              let instance = options.instance,
+                initialScale = 1,
+                pannedX = 0,
+                pannedY = 0;
 
-              function updateSvgClassName(){
-                options.svgElement.setAttribute('class', '' + (svgActive ? 'active':''))
-              }
+              this.hammer = Hammer(options.svgElement);
 
-              updateSvgClassName();
+              this.hammer.get('pinch').set({enable: true});
 
-              this.listeners = {
-                mouseleave: function(){
-                  svgActive = false;
-                  options.instance.disableZoom();
-                  updateSvgClassName()
-                },
-                mouseenter: function(){
-                  svgActive = true;
-                  options.instance.enableZoom();
-                  updateSvgClassName()
+              this.hammer.on('doubletap', function(ev){
+                instance.zoomIn()
+              });
+
+              this.hammer.on('panstart panmove touchstart touchmove', function(ev){
+                if (ev.type === 'panstart' || ev.type === 'touchstart') {
+                  pannedX = 0;
+                  pannedY = 0;
                 }
-              };
 
-              this.listeners.mousemove = this.listeners.mouseenter;
+                instance.panBy({x: ev.deltaX - pannedX, y: ev.deltaY - pannedY});
 
-              for (const eventName in this.listeners){
-                options.svgElement.addEventListener(eventName, this.listeners[eventName])
-              }
+                pannedX = ev.deltaX;
+                pannedY = ev.deltaY;
+              });
+
+              this.hammer.on('pinchstart pinchmove', function(ev){
+                if (ev.type === 'pinchstart') {
+                  initialScale = instance.getZoom();
+                  instance.zoom(initialScale * ev.scale);
+                }
+
+                instance.zoom(initialScale * ev.scale);
+              });
+
+              options.svgElement.addEventListener('touchmove', function(e){ e.preventDefault(); });
             }
             , destroy: function(options){
-              for (const eventName in this.listeners){
-                options.svgElement.removeEventListener(eventName, this.listeners[eventName])
-              }
+              this.hammer.destroy()
             }
           }
         });
@@ -307,6 +314,12 @@
         this.panZoom.resize();
         this.panZoom.fit();
         this.panZoom.enablePan();
+
+        window.myPanZoom = this.panZoom;
+
+        const bBox = document.getElementById("svg").firstElementChild.getBBox();
+        this.panZoom.zoom(Math.min(width / bBox.width, height / bBox.height));
+        this.panZoom.pan({x:-53,y:0})
       }
     }
   };
@@ -364,7 +377,7 @@
     transition: box-shadow 0.1s, background-color 0.1s;
   }
 
-  svg.active {
+  svg:hover {
     box-shadow: 0 0 16px 3px #888888;
     background-color: #464646;
   }
