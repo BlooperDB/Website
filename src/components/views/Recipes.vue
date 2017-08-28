@@ -266,6 +266,7 @@
           dblClickZoomEnabled: true,
           zoomEnabled: true,
           maxZoom: 3,
+          minZoom: 0.25,
           customEventsHandler: {
             haltEventListeners: ['touchstart', 'touchend', 'touchmove', 'touchleave', 'touchcancel'],
             init: function(options){
