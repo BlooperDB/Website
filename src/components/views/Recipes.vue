@@ -317,9 +317,21 @@
 
         window.myPanZoom = this.panZoom;
 
-        const bBox = document.getElementById("svg").firstElementChild.getBBox();
-        this.panZoom.zoom(Math.min(width / bBox.width, height / bBox.height));
-        this.panZoom.pan({x:-53,y:0})
+        const tempSvg = document.getElementById("svg");
+        const tempG = tempSvg.firstElementChild;
+        this.panZoom.zoom(Math.min(Math.min(width / tempG.getBBox().width, height / tempG.getBBox().height), 1));
+
+        if(window.width <= 768) {
+          this.panZoom.pan({
+            x: tempSvg.getBoundingClientRect().left - tempG.getBoundingClientRect().left,
+            y: tempSvg.getBoundingClientRect().top - tempG.getBoundingClientRect().top,
+          })
+        }else{
+          this.panZoom.pan({
+            x: -53,
+            y: 0,
+          })
+        }
       }
     }
   };
