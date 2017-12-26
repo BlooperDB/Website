@@ -11,7 +11,7 @@
         <md-layout :md-gutter="8">
           <md-layout md-flex-xsmall="50" md-flex-small="33" md-flex="25">
             <md-input-container>
-              <label for="item">Item</label>
+              <label for="item">{{ $t('recipe_tree.item') }}</label>
               <md-select name="item" id="item" v-model="selectedRecipe">
                 <md-option v-for="i in sortedItems" :key="i" :value="items[i].name">{{ language[items[i].name] || items[i].name }}</md-option>
               </md-select>
@@ -19,7 +19,7 @@
           </md-layout>
           <md-layout md-flex-xsmall="50" md-flex-small="33" md-flex="25">
             <md-input-container>
-              <label>Amount</label>
+              <label>{{ $t('recipe_tree.amount') }}</label>
               <md-input v-model="amount"></md-input>
             </md-input-container>
           </md-layout>

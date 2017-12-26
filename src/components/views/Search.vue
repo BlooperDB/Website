@@ -2,7 +2,7 @@
   <div>
     <section id="results">
       <container>
-        <h1>Search Results</h1>
+        <h1>{{ $t('search.results') }}</h1>
         <transition name="page" mode="out-in">
           <loader v-if="loading"></loader>
           <template v-else-if="blueprints && blueprints.length > 0">

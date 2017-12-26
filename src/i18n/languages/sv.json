@@ -1,7 +1,9 @@
 {
     "index": {
         "slogan": "Ladda ned och dela med sig Factoriobl\u00e5kopior.",
-        "popularBlueprints": "Popul\u00e4ra Bl\u00e5kopior"
+        "popularBlueprints": "Popul\u00e4ra Bl\u00e5kopior",
+        "topBlueprints": "B\u00e4sta Bl\u00e5kopior",
+        "newBlueprints": "Nya Bl\u00e5kopior"
     },
     "state": {
         "loading": "Laddar..."
@@ -14,22 +16,28 @@
         "menu": {
             "blueprints": "Mina Bl\u00e5kopior",
             "settings": "Inst\u00e4llningar",
-            "signOut": "Logga ut"
+            "signOut": "Logga ut",
+            "tools": {
+                "recipe_tree": "Receptträdet"
+            }
         }
     },
     "footer": {
         "copyright": "Alla r\u00e4ttigheter f\u00f6rbeh\u00e5llna."
     },
     "search": {
-        "placeholder": "S\u00f6k efter bl\u00e5kopior..."
+        "results": "Sökresultat",
+        "placeholder": "S\u00f6k efter bl\u00e5kopior...",
+        "no_options": "Inga etiketter hittades"
     },
     "create": {
         "title": "Ladda upp en bl\u00e5kopia",
         "button": "Spara bl\u00e5kopia",
         "placeholder": {
-            "name": "Skriva in bl\u00e5kopiasnamn",
-            "description": "Skriva in bl\u00e5kopiasbeskrivning",
-            "blueprint": "Klistra in en bl\u00e5kopiaskod"
+            "name": "Skriv in bl\u00e5kopiasnamn",
+            "description": "Skriv in bl\u00e5kopiasbeskrivning",
+            "blueprint": "Klistra in en bl\u00e5kopiaskod",
+            "tags": "L\u00e4gg till en etikett..."
         }
     },
     "view": {
@@ -49,7 +57,7 @@
         "button": "Spara",
         "updated": "Inst\u00e4llningar uppdaterades!",
         "placeholder": {
-            "username": "Skriva in ett anv\u00e4ndarnamn h\u00e4r"
+            "username": "Skriv in ett anv\u00e4ndarnamn h\u00e4r"
         }
     },
     "errors": {
@@ -57,11 +65,12 @@
         "2": "Fel: Ingenting \u00e4ndrades",
         "102": "Fel: Du m\u00e5ste vara inloggad f\u00f6r att g\u00f6ra det",
         "103": "Fel: Anv\u00e4ndare finns inte",
-        "104": "Fel: Det \u00e4r inte ett giltigt anv\u00e4ndarnamn",
+        "104": "Fel: Det d\u00e4r \u00e4r inte ett giltigt anv\u00e4ndarnamn",
         "105": "Fel: Du beh\u00f6ver ett anv\u00e4ndarnamn f\u00f6r att g\u00f6ra det",
         "106": "Fel: Det anv\u00e4ndarnamnet \u00e4r redan upptagen",
         "200": "Fel: Bl\u00e5kopian finns inte",
         "300": "Fel: Bl\u00e5kopias\u00e4ndringen finns inte",
-        "400": "Fel: Bl\u00e5kopiaskommentaren finns inte"
+        "400": "Fel: Bl\u00e5kopiaskommentaren finns inte",
+        "500": "Fel: Inga s\u00f6ktermer f\u00f6rsedda"
     }
 }

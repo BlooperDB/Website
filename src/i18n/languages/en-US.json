@@ -26,7 +26,9 @@
         "copyright": "All rights reserved."
     },
     "search": {
-        "placeholder": "Search blueprints..."
+        "results": "Search Results",
+        "placeholder": "Search blueprints...",
+        "no_options": "No matching tags found!"
     },
     "create": {
         "title": "Upload a Blueprint",
@@ -57,6 +59,10 @@
         "placeholder": {
             "username": "Username"
         }
+    },
+    "recipe_tree": {
+        "item": "Item",
+        "amount": "Amount"
     },
     "errors": {
         "1": "Error: Invalid request data",

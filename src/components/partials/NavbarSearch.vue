@@ -9,8 +9,19 @@
           <div class="navbar-search-reveal">
             <container class="navbar-search-reveal-inner">
               <md-icon class="back-icon" @click.native="setSearchRevealVisible(false)">arrow_back</md-icon>
-              <text-input v-model="searchQuery" class="search-reveal-input" type="text"
-                          :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
+              <v-select
+                      class="search-reveal-input"
+                      ref="searchInput"
+                      :onChange="onChooseTag"
+                      :onSearch="autocompleteTags"
+                      :options="availableTags"
+                      :placeholder="$t('search.placeholder')"
+                      :filterable="false"
+                      :multiple="true"
+                      :debounce="200"
+              >
+                <span slot="no-options">{{ $t('search.no-options') }}</span>
+              </v-select>
             </container>
           </div>
         </div>
@@ -19,32 +30,47 @@
     <template v-else>
       <div class="navbar-search-inner">
         <md-icon class="search-icon">search</md-icon>
-        <text-input v-model="searchQuery" class="search-input" type="text"
-                    :placeholder="$t('search.placeholder')" @keyup.enter="route(searchQuery)"></text-input>
+        <v-select
+                class="search-input"
+                ref="searchInput"
+                :onChange="onChooseTag"
+                :onSearch="autocompleteTags"
+                :options="availableTags"
+                :placeholder="$t('search.placeholder')"
+                :filterable="false"
+                :multiple="true"
+                :debounce="200"
+        >
+          <span slot="no-options">{{ $t('search.no_options') }}</span>
+        </v-select>
       </div>
     </template>
   </div>
 </template>
 
 <script>
+  import vSelect from 'vue-select';
   import debounce from 'lodash.debounce';
 
   import Container from './Container';
-  import TextInput from './TextInput';
   import { SEARCH_SET_RESULTS, SEARCH_SET_QUERY, SEARCH_SET_LOADING_RESULTS } from '../../store/types';
   import { searchBlueprints } from '../../api/blooper/blueprint';
+  import { searchTags } from '../../api/blooper/tag';
 
   export default {
     name: 'navbar-search',
     components: {
-      Container,
-      TextInput
+      vSelect,
+      Container
     },
     data() {
       return {
         searchRevealVisible: false,
         searchQuery: '',
-        mobile: window.innerWidth <= 600
+        mobile: window.innerWidth <= 600,
+        availableTags: [],
+        tags: [],
+        beforeSpace: ''
       };
     },
     computed: {
@@ -57,30 +83,55 @@
         this.searchRevealVisible = searchRevealVisible;
       },
       // For some reason this doesn't work with an arrow function
+      onChooseTag(tags) {
+        this.tags = tags;
+        this.searchQuery = this.beforeSpace;
+        requestAnimationFrame(() => this.$refs.searchInput.$el.getElementsByTagName('input')[0].focus()); // select textbox
+      },
+      autocompleteTags(search, loading) {
+        this.beforeSpace = search.substring(0, search.lastIndexOf(' ') + 1);
+        this.doAutocompleteTags(search, loading);
+      },
+      // eslint-disable-next-line
+      doAutocompleteTags: debounce(function (search, loading) {
+        loading(true);
+        if (search !== '') {
+          const lastWord = search.substring(search.lastIndexOf(' ') + 1);
+          if (lastWord === '') {
+            this.availableTags = [];
+            loading(false);
+          } else {
+            searchTags(lastWord)
+              .then((tags) => {
+                this.availableTags = tags;
+                loading(false);
+              });
+          }
+        }
+        this.searchQuery = search;
+      }, 200, { leading: true, trailing: true }),
       // eslint-disable-next-line
       runSearch: debounce(function () {
-        searchBlueprints(this.searchQuery);
-      }, 400),
+        const query = [...this.tags, this.searchQuery].join(' ');
+        if (query === '') {
+          this.$store.commit(SEARCH_SET_RESULTS, []);
+        } else {
+          searchBlueprints(query);
+        }
+      }, 400, { leading: true, trailing: true }),
       route(query) {
         if (query === '') {
           this.$router.replace({ name: 'search' });
-          return;
-        }
-
-        if (this.$route.name === 'search') {
+        } else if (this.$route.name === 'search') {
           this.$router.replace({ name: 'search', params: { query } });
         } else {
           this.$router.push({ name: 'search', params: { query } });
         }
+        this.$refs.searchInput.search = query || '';
       }
     },
     watch: {
       searchQuery(newSearchQuery) {
-        if (newSearchQuery === '') {
-          this.$store.commit(SEARCH_SET_RESULTS, []);
-          return;
-        }
-
         this.runSearch();
         this.route(newSearchQuery);
 
@@ -121,10 +172,46 @@
     .search-input {
       flex: 1;
 
-      input {
-        font-size: 1.2em;
-        border-bottom: none !important;
-        padding: 10px 15px !important;
+      .dropdown-toggle {
+        border: none;
+
+        .selected-tag {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          font-family: Roboto, sans-serif;
+          font-weight: 100;
+          font-size: 1.2em;
+          -webkit-font-smoothing: subpixel-antialiased;
+
+          button {
+            padding-left: 2px;
+          }
+        }
+
+        input {
+          color: #fff;
+          border-bottom: none !important;
+          padding: 10px 15px !important;
+
+          font-family: Roboto, sans-serif;
+          font-weight: 100;
+          font-size: 1.2em;
+          -webkit-font-smoothing: subpixel-antialiased;
+        }
+      }
+
+      .dropdown-menu {
+        li, li > a {
+          color: black;
+          text-decoration: none;
+
+          font-family: Roboto, sans-serif;
+          font-weight: 100;
+          font-size: 1.2em;
+          -webkit-font-smoothing: subpixel-antialiased;
+        }
       }
     }
     .search-icon {
@@ -157,12 +244,49 @@
       flex: 1;
       margin-left: 10px;
 
-      input {
-        color: #000 !important;
-        font-size: 1.2em;
+      .dropdown-toggle {
+        border: none;
 
-        &::placeholder {
-          color: #CCC !important;
+        .selected-tag {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          font-family: Roboto, sans-serif;
+          font-weight: 100;
+          font-size: 1.2em;
+          -webkit-font-smoothing: subpixel-antialiased;
+
+          button {
+            padding-left: 2px;
+          }
+        }
+
+        input {
+          color: #000 !important;
+          border-bottom: none !important;
+          padding: 10px 15px !important;
+
+          font-family: Roboto, sans-serif;
+          font-weight: 100;
+          font-size: 1.2em;
+          -webkit-font-smoothing: subpixel-antialiased;
+
+          &::placeholder {
+            color: #CCC !important;
+          }
+        }
+      }
+
+      .dropdown-menu {
+        li, li > a {
+          color: black;
+          text-decoration: none;
+
+          font-family: Roboto, sans-serif;
+          font-weight: 100;
+          font-size: 1.2em;
+          -webkit-font-smoothing: subpixel-antialiased;
         }
       }
     }
